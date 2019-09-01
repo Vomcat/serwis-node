@@ -1,15 +1,15 @@
 const Sequelize = require("sequelize");
-const db = require("../config/db");
-const { check, validationResult } = require("express-validator/check");
 
-module.exports = db.sequelize.define("user", {
+const db = require("../config/db");
+
+module.exports = db.sequelize.define("User", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     allowNull: false
   },
-  login: {
+  name: {
     type: Sequelize.STRING,
     unique: true
   },

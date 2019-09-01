@@ -11,4 +11,7 @@ const connectDB = async () => {
   }
 };
 
+connectDB.Sequelize = Sequelize;
+connectDB.sequelize = Sequelize;
+
 module.exports = connectDB;
