@@ -3,9 +3,18 @@ const connectDB = require("./config/db");
 
 const app = express();
 
-app.get("/", (req, res) => res.send("dziala"));
-
+//Conect to DB
 connectDB();
+
+app.use(express.json({ extended: false }));
+
+app.get("/", (req, res) => res.send("API Run"));
+
+//Routes
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/customers", require("./routes/api/customers"));
+app.use("/api/repairs", require("./routes/api/repairs"));
 
 const PORT = process.env.PORT || 5000;
 
