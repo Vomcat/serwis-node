@@ -1,14 +1,14 @@
 const express = require("express");
 
 const router = express.Router();
-const { check, validationResult } = require("express-validator/check");
+const { check, validationResult } = require("express-validator");
 
 const User = require("../../models/User");
 
 router.post(
   "/",
   [
-    check("login", "Imię jest wymagane")
+    check("name", "Imię jest wymagane")
       .not()
       .isEmpty(),
     check("email", "Wprowadz email").isEmail(),
@@ -22,7 +22,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { login, email, password } = req.body;
+    const { name, email, password } = req.body;
 
     try {
       let user = await User.findOne({ email });

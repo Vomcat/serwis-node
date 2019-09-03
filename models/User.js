@@ -1,8 +1,7 @@
 const Sequelize = require("sequelize");
+const db = require("../config/default");
 
-const db = require("../config/db");
-
-module.exports = db.sequelize.define("User", {
+module.exports = db.define("User", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,

@@ -1,17 +1,6 @@
-const config = require("./default");
-const Sequelize = require("sequelize");
+const sequelize = require("./default");
 
-const connectDB = async () => {
-  try {
-    await config.authenticate();
-    console.log("Polaczone..");
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
-};
-
-connectDB.Sequelize = Sequelize;
-connectDB.sequelize = Sequelize;
-
-module.exports = connectDB;
+module.exports = sequelize
+  .authenticate()
+  .then(() => console.log("połączono z 22 bazą"))
+  .catch(err => console.error(err));

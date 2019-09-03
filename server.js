@@ -3,9 +3,6 @@ const connectDB = require("./config/db");
 
 const app = express();
 
-//Conect to DB
-connectDB();
-
 app.use(express.json({ extended: false }));
 
 app.get("/", (req, res) => res.send("API Run"));
