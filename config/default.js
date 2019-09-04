@@ -3,6 +3,12 @@ const Sequelize = require("sequelize");
 const sequelize = new Sequelize("service", "root", "", {
   host: "localhost",
   dialect: "mysql",
+  logging: false,
+  jwtSecret: "$mysecret",
+
+  define: {
+    timestamps: false
+  },
 
   pool: {
     max: 5,

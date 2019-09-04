@@ -1,7 +1,9 @@
 const express = require("express");
-
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
 const User = require("../../models/User");
 
@@ -22,18 +24,43 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password } = req.body;
+    const { name, first_name, last_name, email, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
-
-      if (user) {
-        res.status(400).json({ errors: [{ msg: "Użytkownik istnieje" }] });
-      }
+      let user = await User.findOne({
+        where: { email }
+      });
       //Czy istnieje
+      if (user) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Użytkownik istnieje" }] });
+      }
+
+      user = new User({
+        name,
+        first_name,
+        last_name,
+        email,
+        password
+      });
+
       //Szyfrowanie hasla
+      const salt = await bcrypt.genSalt(10);
+
+      user.password = await bcrypt.hash(password, salt);
+
+      await user.save();
+
       // Return JWT
-      res.send("user route");
+
+      const payload = {
+        user: {
+          id: user.id
+        }
+      };
+
+      jwt.sign(payload, config.get("jwtToken"), { expiresIn: 360000 });
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");

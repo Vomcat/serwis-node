@@ -13,7 +13,7 @@ module.exports = db.define("User", {
     unique: true
   },
 
-  fisrt_name: {
+  first_name: {
     type: Sequelize.STRING
   },
   last_name: {
