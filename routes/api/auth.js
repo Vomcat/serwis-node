@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/auth");
 const { check, validationResult } = require("express-validator");
-const config = require("../../config/default");
+const config = require("config");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
@@ -11,7 +11,7 @@ const User = require("../../models/User");
 router.get("/", auth, async (req, res) => {
   try {
     console.log(User);
-    const user = await User.findByPk(req.user.id);
+    const user = await User.findById(req.user.id).select("-password");
     res.json(user);
   } catch (err) {
     console.log(err.message);
@@ -34,7 +34,7 @@ router.post(
 
     try {
       let user = await User.findOne({
-        where: { email }
+        email
       });
       //Czy istnieje
       if (!user) {
@@ -57,7 +57,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.options.jwtSecret,
+        config.get("jwtSecret"),
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;

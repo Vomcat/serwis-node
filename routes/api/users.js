@@ -3,7 +3,7 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const config = require("../../config/default");
+const config = require("config");
 
 const User = require("../../models/User");
 
@@ -27,9 +27,7 @@ router.post(
     const { name, first_name, last_name, email, password } = req.body;
 
     try {
-      let user = await User.findOne({
-        where: { email }
-      });
+      let user = await User.findOne({ email });
       //Czy istnieje
       if (user) {
         return res
@@ -62,7 +60,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.options.jwtSecret,
+        config.get("jwtSecret"),
         { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
