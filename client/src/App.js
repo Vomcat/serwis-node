@@ -10,9 +10,9 @@ const App = () => (
   <Router>
     <Fragment>
       <Navbar />
-      <Route exact path='/' component={Login} />
+      <Route exact path="/" component={Landing} />
       <Switch>
-        <Route exact path="/login"
+        <Route exact path="/login" component={Login} />
       </Switch>
     </Fragment>
   </Router>
