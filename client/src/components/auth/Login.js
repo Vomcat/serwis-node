@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { login } from "../../actions/auth";
 
-const Login = () => {
+const Login = ({ login }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -13,6 +16,7 @@ const Login = () => {
 
   const onSubmit = async e => {
     e.preventDefault();
+    login(email, password);
   };
   return (
     <Fragment>
@@ -57,4 +61,15 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.PropTypes = {
+  login: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(
+  null,
+  { login }
+)(Login);
