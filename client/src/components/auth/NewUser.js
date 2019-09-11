@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from "react";
+import { connect } from "react-redux";
+import { setAlert } from "../../actions/alert";
 import axios from "axios";
+import PropTypes from "prop-types";
 
-const NewUser = () => {
+const NewUser = ({ setAlert }) => {
   const [formData, setFormData] = useState({
     name: "",
     first_name: "",
@@ -27,7 +30,7 @@ const NewUser = () => {
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
-      console.log("zle haslo");
+      setAlert("zle haslo", "danger");
     } else {
       console.log("działa");
       /*
@@ -56,47 +59,47 @@ const NewUser = () => {
   };
   return (
     <Fragment>
-      <div className='text-center'>
-        <form className='form-signin' onSubmit={e => onSubmit(e)}>
-          <h1 className='h3 mb-3 font-weight-normal'>
+      <div className="text-center">
+        <form className="form-signin" onSubmit={e => onSubmit(e)}>
+          <h1 className="h3 mb-3 font-weight-normal">
             Dodaj nowego pracownika
           </h1>
 
           <input
-            type='text'
-            name='name'
-            className='form-control'
-            placeholder=' Nazwa użytkownika'
+            type="text"
+            name="name"
+            className="form-control"
+            placeholder=" Nazwa użytkownika"
             value={name}
             onChange={e => onChange(e)}
             required
             autoFocus
           />
           <input
-            type='text'
-            name='first_name'
-            className='form-control'
-            placeholder='Imię'
+            type="text"
+            name="first_name"
+            className="form-control"
+            placeholder="Imię"
             value={first_name}
             onChange={e => onChange(e)}
             required
             autoFocus
           />
           <input
-            type='text'
-            name='last_name'
-            className='form-control'
-            placeholder='Nazwisko'
+            type="text"
+            name="last_name"
+            className="form-control"
+            placeholder="Nazwisko"
             value={last_name}
             onChange={e => onChange(e)}
             required
             autoFocus
           />
           <input
-            type='email'
-            name='email'
-            className='form-control'
-            placeholder=' Email'
+            type="email"
+            name="email"
+            className="form-control"
+            placeholder=" Email"
             value={email}
             onChange={e => onChange(e)}
             required
@@ -104,27 +107,28 @@ const NewUser = () => {
           />
 
           <input
-            type='password'
-            name='password'
-            className='form-control'
-            placeholder='Hasło'
+            type="password"
+            name="password"
+            className="form-control"
+            placeholder="Hasło"
             value={password}
             onChange={e => onChange(e)}
             required
           />
           <input
-            type='password'
-            name='password2'
-            className='form-control'
-            placeholder='Powtórz hasło'
+            type="password"
+            name="password2"
+            className="form-control"
+            placeholder="Powtórz hasło"
             value={password2}
             onChange={e => onChange(e)}
             required
           />
 
           <button
-            className='btn btn-lg btn-btn btn-lg btn-secondary btn-block'
-            type='submit'>
+            className="btn btn-lg btn-btn btn-lg btn-secondary btn-block"
+            type="submit"
+          >
             Dodaj
           </button>
         </form>
@@ -133,4 +137,11 @@ const NewUser = () => {
   );
 };
 
-export default NewUser;
+NewUser.propTypes = {
+  setAlert: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { setAlert }
+)(NewUser);
