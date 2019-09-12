@@ -33,7 +33,7 @@ const NewUser = ({ setAlert, add }) => {
     if (password !== password2) {
       setAlert("zle haslo", "danger");
     } else {
-      add({ name, email, password });
+      add({ name, first_name, last_name, email, password });
       /*
       const newUser = {
         name,
@@ -60,75 +60,72 @@ const NewUser = ({ setAlert, add }) => {
   };
   return (
     <Fragment>
-      <div className='text-center'>
-        <form className='form-signin' onSubmit={e => onSubmit(e)}>
-          <h1 className='h3 mb-3 font-weight-normal'>
+      <div className="text-center">
+        <form className="form-signin" onSubmit={e => onSubmit(e)}>
+          <h1 className="h3 mb-3 font-weight-normal">
             Dodaj nowego pracownika
           </h1>
 
           <input
-            type='text'
-            name='name'
-            className='form-control'
-            placeholder=' Nazwa użytkownika'
+            type="text"
+            name="name"
+            className="form-control"
+            placeholder=" Nazwa użytkownika"
             value={name}
             onChange={e => onChange(e)}
             required
-            autoFocus
           />
           <input
-            type='text'
-            name='first_name'
-            className='form-control'
-            placeholder='Imię'
+            type="text"
+            name="first_name"
+            className="form-control"
+            placeholder="Imię"
             value={first_name}
             onChange={e => onChange(e)}
             required
-            autoFocus
           />
           <input
-            type='text'
-            name='last_name'
-            className='form-control'
-            placeholder='Nazwisko'
+            type="text"
+            name="last_name"
+            className="form-control"
+            placeholder="Nazwisko"
             value={last_name}
             onChange={e => onChange(e)}
             required
-            autoFocus
           />
           <input
-            type='email'
-            name='email'
-            className='form-control'
-            placeholder=' Email'
+            type="email"
+            name="email"
+            className="form-control"
+            placeholder=" Email"
             value={email}
             onChange={e => onChange(e)}
             required
-            autoFocus
           />
 
           <input
-            type='password'
-            name='password'
-            className='form-control'
-            placeholder='Hasło'
+            type="password"
+            name="password"
+            className="form-control"
+            placeholder="Hasło"
             value={password}
             onChange={e => onChange(e)}
             required
           />
           <input
-            type='password'
-            name='password2'
-            className='form-control'
-            placeholder='Powtórz hasło'
+            type="password"
+            name="password2"
+            className="form-control"
+            placeholder="Powtórz hasło"
             value={password2}
             onChange={e => onChange(e)}
             required
           />
 
           <button
-            className='btn btn-lg btn-btn btn-lg btn-secondary btn-block'
-            type='submit'>
+            className="btn btn-lg btn-btn btn-lg btn-secondary btn-block"
+            type="submit"
+          >
             Dodaj
           </button>
         </form>
