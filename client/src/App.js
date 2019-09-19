@@ -3,6 +3,8 @@ import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
 import NewUser from "./components/auth/NewUser";
+import Main from "./components/main/Main";
+import PrivateRoutes from "./components/routes/PrivateRoutes";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Alert from "./components/layout/Alert";
 import { Provider } from "react-redux";
@@ -25,11 +27,12 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar />
-          <Route exact path="/" component={Landing} />
+          <Route exact path='/' component={Landing} />
           <Alert />
           <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/new" component={NewUser} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/new' component={NewUser} />
+            <PrivateRoutes exact path='/main' component={Main} />
           </Switch>
         </Fragment>
       </Router>

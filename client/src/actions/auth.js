@@ -94,6 +94,7 @@ export const login = (email, password) => async dispatch => {
   }
 };
 //Wylogowanie
+
 export const logout = () => dispatch => {
   dispatch({
     type: LOGOUT
