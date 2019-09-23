@@ -12,7 +12,8 @@ const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   loading: true,
-  user: null
+  user: null,
+  users: []
 };
 export default function(state = initialState, action) {
   const { type, payload } = action;
@@ -24,13 +25,19 @@ export default function(state = initialState, action) {
         loading: false,
         user: payload
       };
-    case ADD_USER_SUCCES:
+
     case LOGIN_SUCCES:
       localStorage.setItem("token", payload.token);
       return {
         ...state,
         ...payload,
         isAuthenticated: true,
+        loading: false
+      };
+    case ADD_USER_SUCCES:
+      return {
+        ...state,
+        user: payload,
         loading: false
       };
 

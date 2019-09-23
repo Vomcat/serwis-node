@@ -50,14 +50,11 @@ export const add = ({
       type: ADD_USER_SUCCES,
       payload: res.data
     });
-    dispatch(loadUser);
+    dispatch(setAlert("Experience Added", "success"));
   } catch (err) {
-    const errors = err.responde.data.errors;
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
-    }
     dispatch({
-      type: ADD_USER_FAIL
+      type: ADD_USER_FAIL,
+      payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
 };
@@ -79,8 +76,6 @@ export const login = (email, password) => async dispatch => {
       type: LOGIN_SUCCES,
       payload: res.data
     });
-
-    dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 

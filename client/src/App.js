@@ -3,7 +3,7 @@ import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
 import NewUser from "./components/auth/NewUser";
-import Main from "./components/main/Main";
+import Main from "./components/repairs/Main";
 import PrivateRoutes from "./components/routes/PrivateRoutes";
 
 import "./App.css";
