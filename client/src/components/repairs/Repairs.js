@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Main = props => {
+const Repairs = props => {
   return <div>Main</div>;
 };
 
-Main.propTypes = {};
+Repairs.propTypes = {};
 
-export default Main;
+export default Repairs;
