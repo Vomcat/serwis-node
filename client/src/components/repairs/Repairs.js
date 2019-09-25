@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getAllRepairs } from "../../actions/repairs";
 
-const Repairs = props => {
+const Repairs = ({ getAllRepairs }) => {
   return <div>Main</div>;
 };
 

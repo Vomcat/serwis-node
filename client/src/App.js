@@ -4,6 +4,7 @@ import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
 import NewUser from "./components/auth/NewUser";
 import Repairs from "./components/repairs/Repairs";
+import NewRepair from "./components/repairs/NewRepair";
 import PrivateRoutes from "./components/routes/PrivateRoutes";
 
 import "./App.css";
@@ -29,12 +30,13 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar />
-          <Route exact path="/" component={Landing} />
+          <Route exact path='/' component={Landing} />
           <Alert />
           <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/new" component={NewUser} />
-            <PrivateRoutes exact path="/repairs" component={Repairs} />
+            <Route exact path='/login' component={Login} />
+            <PrivateRoutes exact path='/new' component={NewUser} />
+            <PrivateRoutes exact path='/repairs' component={Repairs} />
+            <PrivateRoutes exact path='/newRepair' component={NewRepair} />
           </Switch>
         </Fragment>
       </Router>

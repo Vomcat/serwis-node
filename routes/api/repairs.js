@@ -8,29 +8,28 @@ const User = require("../../models/User");
 
 router.post(
   "/",
+
   [
-    auth,
-    [
-      check("first_name", "Imie jest wymagane")
-        .not()
-        .isEmpty(),
-      check("last_name", "Nazwisko jest wymagane")
-        .not()
-        .isEmpty(),
-      check("device", "Nazwa jest wymagana")
-        .not()
-        .isEmpty(),
-      check("imei", "Imei jest wymagany")
-        .not()
-        .isEmpty(),
-      check("description", "Opis jest wymagany")
-        .not()
-        .isEmpty(),
-      check("cost", "Opis jest wymagany")
-        .not()
-        .isEmpty()
-    ]
+    check("first_name", "Imie jest wymagane")
+      .not()
+      .isEmpty(),
+    check("last_name", "Nazwisko jest wymagane")
+      .not()
+      .isEmpty(),
+    check("device", "Nazwa jest wymagana")
+      .not()
+      .isEmpty(),
+    check("imei", "Imei jest wymagany")
+      .not()
+      .isEmpty(),
+    check("description", "Opis jest wymagany")
+      .not()
+      .isEmpty(),
+    check("cost", "Opis jest wymagany")
+      .not()
+      .isEmpty()
   ],
+
   async (req, res) => {
     const erros = validationResult(req);
     if (!erros.isEmpty()) {
