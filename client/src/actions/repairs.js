@@ -46,7 +46,7 @@ export const addNewRepair = (
     );
 
     if (!edit) {
-      history.push("/newRepair");
+      history.push("/repairs");
     }
   } catch (err) {
     const errors = err.response.data.errors;

@@ -8,6 +8,11 @@ const Navbar = ({ auth: { isAuthenticated, loading, logout } }) => {
   const authLink = (
     <ul className='nav navbar-nav ml-auto'>
       <li className='nav-item'>
+        <Link className='nav-link' to='/repairs'>
+          Naprawy
+        </Link>
+      </li>
+      <li className='nav-item'>
         <Link className='nav-link' to='/new'>
           Dodaj
         </Link>

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addNewRepair } from "../../actions/repairs";
 
-const NewRepair = ({ addNewRepair, history }) => {
+const EditRepair = ({ repair: { repair, loading }, addNewRepair, history }) => {
   const [formData, SetFormData] = useState({
     first_name: "",
     last_name: "",
@@ -35,7 +35,18 @@ const NewRepair = ({ addNewRepair, history }) => {
     e.preventDefault();
     addNewRepair(formData, history);
   };
-
+  useEffect(() => {
+    SetFormData({
+      first_name: loading || !repair.first_name ? "" : repair.last_name,
+      phone_number: loading || !repair.phone_number ? "" : repair.phone_number,
+      email: loading || !repair.email ? "" : repair.email,
+      device: loading || !repair.device ? "" : repair.device,
+      code: loading || !repair.code ? "" : repair.code,
+      imei: loading || !repair.imei ? "" : repair.imei,
+      description: loading || !repair.description ? "" : repair.description,
+      cost: loading || !repair.cost ? "" : repair.cost
+    });
+  }, [loading]);
   return (
     <Fragment>
       <div className='container text-center title'>
@@ -162,17 +173,18 @@ const NewRepair = ({ addNewRepair, history }) => {
   );
 };
 
-NewRepair.propTypes = {
+EditRepair.propTypes = {
   addNewRepair: PropTypes.func.isRequired,
+  repairs: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  repair: state.repair
+  repairs: state.repairs
 });
 
 export default connect(
   mapStateToProps,
   { addNewRepair }
-)(withRouter(NewRepair));
+)(withRouter(EditRepair));
