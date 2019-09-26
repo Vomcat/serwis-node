@@ -38,10 +38,15 @@ export const addNewRepair = (
       payload: res.data
     });
 
-    dispatch(setAlert(edit ? "Profile Updated" : "Profile Created", "success"));
+    dispatch(
+      setAlert(
+        edit ? "Zmiany zostały wprowadzone" : "Utworzono naprawę",
+        "success"
+      )
+    );
 
     if (!edit) {
-      history.push("/new");
+      history.push("/newRepair");
     }
   } catch (err) {
     const errors = err.response.data.errors;

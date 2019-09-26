@@ -10,24 +10,27 @@ router.post(
   "/",
 
   [
-    check("first_name", "Imie jest wymagane")
-      .not()
-      .isEmpty(),
-    check("last_name", "Nazwisko jest wymagane")
-      .not()
-      .isEmpty(),
-    check("device", "Nazwa jest wymagana")
-      .not()
-      .isEmpty(),
-    check("imei", "Imei jest wymagany")
-      .not()
-      .isEmpty(),
-    check("description", "Opis jest wymagany")
-      .not()
-      .isEmpty(),
-    check("cost", "Opis jest wymagany")
-      .not()
-      .isEmpty()
+    auth,
+    [
+      check("first_name", "Imie jest wymagane")
+        .not()
+        .isEmpty(),
+      check("last_name", "Nazwisko jest wymagane")
+        .not()
+        .isEmpty(),
+      check("device", "Nazwa jest wymagana")
+        .not()
+        .isEmpty(),
+      check("imei", "Imei jest wymagany")
+        .not()
+        .isEmpty(),
+      check("description", "Opis jest wymagany")
+        .not()
+        .isEmpty(),
+      check("cost", "Opis jest wymagany")
+        .not()
+        .isEmpty()
+    ]
   ],
 
   async (req, res) => {
@@ -49,14 +52,17 @@ router.post(
         imei: req.body.imei,
         description: req.body.description,
         cost: req.body.cost,
+        status: req.body.status,
         user: req.user.id
       });
+      console.log(user);
 
       const repair = await newRepair.save();
 
       res.json(repair);
     } catch (err) {
       console.error(err.message);
+
       res.status(500).send("ServerError");
     }
   }
