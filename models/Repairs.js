@@ -40,8 +40,8 @@ const RepairsSchema = new mongoose.Schema({
     default: Date.now
   },
   status: {
-    type: Boolean,
-    default: true
+    type: String,
+    required: true
   },
   user: {
     type: Schema.Types.ObjectId,

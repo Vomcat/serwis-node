@@ -15,7 +15,7 @@ export const getAllRepairs = () => async dispatch => {
   } catch (err) {
     dispatch({
       type: REPAIR_ERROR,
-      payload: { msg: err.reposne.statusText, status: err.reposne.status }
+      payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
 };
@@ -49,12 +49,6 @@ export const addNewRepair = (
       history.push("/repairs");
     }
   } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
-    }
-
     dispatch({
       type: REPAIR_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }

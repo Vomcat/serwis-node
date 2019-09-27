@@ -120,6 +120,13 @@ const NewUser = ({ setAlert, add }) => {
             onChange={e => onChange(e)}
             required
           />
+          <div className="form-group">
+            <select name="status" value={status} onChange={e => onChange(e)}>
+              <option value="0">Rodzaj użytkownika</option>
+              <option value="admin">Admin</option>
+              <option value="user"> User</option>
+            </select>
+          </div>
 
           <input
             type="submit"

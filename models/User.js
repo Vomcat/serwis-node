@@ -23,8 +23,8 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
   status: {
-    type: Boolean,
-    default: true
+    type: String,
+    required: true
   },
   date: {
     type: Date,

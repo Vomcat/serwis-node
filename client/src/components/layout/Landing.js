@@ -6,17 +6,17 @@ import PropTypes from "prop-types";
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) {
-    return <Redirect to="/main" />;
+    return <Redirect to="/repairs" />;
   }
   return (
-    <section class="text-center">
-      <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-          <main role="main" class="inner cover">
-            <h1 class="cover-heading">Serwis komputerowy</h1>
-            <p class="lead">Zaloguj się na swoje konto</p>
-            <p class="lead">
-              <Link to="/login" class="btn btn-lg btn-secondary">
+    <section className="text-center">
+      <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+          <main role="main" className="inner cover">
+            <h1 className="cover-heading">Serwis komputerowy</h1>
+            <p className="lead">Zaloguj się na swoje konto</p>
+            <p className="lead">
+              <Link to="/login" className="btn btn-lg btn-secondary">
                 Login
               </Link>
             </p>
