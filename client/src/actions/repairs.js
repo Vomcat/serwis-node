@@ -1,21 +1,20 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 
-import { GET_REPAIRS, REPAIR_ERROR, ADD_REPAIR } from "./type";
+import { GET_REPAIRS, REPAIR_ERROR, ADD_REPAIR, UPDATE_REPAIR } from "./type";
 
 //wszystkie naprawy
 
 export const getAllRepairs = () => async dispatch => {
   try {
-    const res = await axios.get("api/repairs/");
+    const res = await axios.get("api/repairs");
     dispatch({
       type: GET_REPAIRS,
       payload: res.data
     });
   } catch (err) {
     dispatch({
-      type: REPAIR_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      type: REPAIR_ERROR
     });
   }
 };
@@ -40,14 +39,28 @@ export const addNewRepair = (
 
     dispatch(
       setAlert(
-        edit ? "Zmiany zostały wprowadzone" : "Utworzono naprawę",
-        "success"
+        (edit ? "Zmiany zostały wprowadzone" : "Utworzono naprawę", "success")
       )
     );
 
-    if (!edit) {
-      history.push("/repairs");
-    }
+    history.push("/repairs");
+  } catch (err) {
+    dispatch({
+      type: REPAIR_ERROR,
+      payload: { msg: err.response.status, status: err.response.status }
+    });
+  }
+};
+
+export const deleteRepair = id => async dispatch => {
+  try {
+    const res = await axios.delete(`api/repairs/${id}`);
+
+    dispatch({
+      tye: UPDATE_REPAIR,
+      payload: res.data
+    });
+    dispatch(setAlert("Naprawa usunięta", "success"));
   } catch (err) {
     dispatch({
       type: REPAIR_ERROR,

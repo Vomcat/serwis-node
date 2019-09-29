@@ -22,7 +22,7 @@ const Login = ({ login, isAuthenticated }) => {
   //przekeierowanie
 
   if (isAuthenticated) {
-    return <Redirect to='/main' />;
+    return <Redirect to='/repairs' />;
   }
   return (
     <Fragment>
