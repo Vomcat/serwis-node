@@ -11,5 +11,5 @@ export const ADD_REPAIR = "ADD_REPAIR";
 export const UPDATE_REPAIR = "UPDATE_REPAIR";
 export const GET_REPAIR = "GET_REPAIR";
 export const GET_REPAIRS = "GET_REPAIRS";
-export const DELET_REPAIR = "DELET_REPAIR";
+export const DELETE_REPAIR = "DELETE_REPAIR";
 export const REPAIR_ERROR = "REPAIR_ERROR";

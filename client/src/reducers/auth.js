@@ -37,11 +37,17 @@ export default function(state = initialState, action) {
     case ADD_USER_SUCCES:
       return {
         ...state,
-        user: payload,
+        user: [...state.user, payload],
         loading: false
       };
 
     case ADD_USER_FAIL:
+      return {
+        ...state,
+        error: payload,
+        loading: false
+      };
+
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:

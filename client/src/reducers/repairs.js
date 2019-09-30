@@ -3,7 +3,7 @@ import {
   UPDATE_REPAIR,
   GET_REPAIR,
   GET_REPAIRS,
-  DELET_REPAIR,
+  DELETE_REPAIR,
   REPAIR_ERROR
 } from "../actions/type";
 
@@ -20,7 +20,7 @@ export default function(state = initialState, action) {
     case ADD_REPAIR:
       return {
         ...state,
-        repairs: payload,
+        repair: [...state.repairs, payload],
         loading: false
       };
     case UPDATE_REPAIR:
@@ -32,7 +32,7 @@ export default function(state = initialState, action) {
     case GET_REPAIR:
       return {
         ...state,
-        repair: payload,
+        repairs: state.repairs.filter(repair => repair._id !== payload),
         loading: false
       };
     case GET_REPAIRS:
@@ -41,7 +41,7 @@ export default function(state = initialState, action) {
         repairs: payload,
         loading: false
       };
-    case DELET_REPAIR:
+    case DELETE_REPAIR:
       return {
         ...state,
         repairs: state.repairs.filter(repair => repair._id !== payload),
