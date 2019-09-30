@@ -182,7 +182,7 @@ NewRepair.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  repairs: state.repairs
+  repair: state.repair
 });
 
 export default connect(
