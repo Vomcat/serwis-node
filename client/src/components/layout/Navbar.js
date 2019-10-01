@@ -42,7 +42,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, logout } }) => {
     <nav className="navbar navbar-expand-md navbar-dark  bg-dark navbar bg-dark">
       <h2>
         <Link className="nav-link" to="/">
-          <i className="" /> Serwis
+          <i class="navbar-brand" /> Serwis
         </Link>
       </h2>
       {!loading && (

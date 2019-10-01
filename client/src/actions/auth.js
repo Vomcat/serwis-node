@@ -50,7 +50,7 @@ export const add = ({
       type: ADD_USER_SUCCES,
       payload: res.data
     });
-    dispatch(setAlert("Dodano nowego użytkownika", "success"));
+    dispatch(setAlert("Dodano nowego użytkownika", "Naprawa została dodana"));
   } catch (err) {
     dispatch({
       type: ADD_USER_FAIL

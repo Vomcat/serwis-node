@@ -28,19 +28,19 @@ const Repairs = ({
         <td>{repair.phone_number}</td>
         <td>{repair.email}</td>
         <td>{repair.device}</td>
-        <td>{repair.imei}</td>
-        <td>{repair.code}</td>
-        <td>{repair.description}</td>
         <td>{repair.cost}</td>
         <td>{repair.status}</td>
         {console.log("naprawa", repair)}
         <td>
-          <Link to='/editRepair'>Edytuj</Link>
+          <Link to="/editRepair" className="btn btn-warning">
+            Edytuj
+          </Link>
         </td>
         <td>
           <button
             onClick={() => deleteRepair(repair._id)}
-            className='btn btn-danger'>
+            className="btn btn-danger"
+          >
             Usuń
           </button>
         </td>
@@ -49,29 +49,30 @@ const Repairs = ({
 
   return (
     <Fragment>
-      <h2>Naprawy</h2>
-      {console.log(repairs)}
+      <div className="container">
+        <h2>Naprawy</h2>
+        {console.log(repairs)}
 
-      <table className='table table-striped '>
-        <thead>
-          <tr>
-            <th className='hide-sm'>Numer naprawy</th>
-            <th>Imie</th>
-            <th className='hide-sm'>Nazwisko</th>
-            <th className='hide-sm'>Nr.telefonu</th>
-            <th className='hide-sm'>Email</th>
-            <th className='hide-sm'>Nazwa urządzenie</th>
-            <th className='hide-sm'>Numer seryjny/Imei</th>
-            <th className='hide-sm'>Kod blokady</th>
-            <th className='hide-sm'>Opis usterki</th>
-            <th className='hide-sm'>Koszt naprawy</th>
-            <th className='hide-sm'>Status naprawy</th>
-            <th />
-            <th />
-          </tr>
-        </thead>
-        <tbody>{table}</tbody>
-      </table>
+        <table className="table  table-hover ">
+          <thead>
+            <tr>
+              <th className="hide-sm">Numer naprawy</th>
+              <th>Imie</th>
+              <th className="hide-sm">Nazwisko</th>
+              <th className="hide-sm">Nr.telefonu</th>
+              <th className="hide-sm">Email</th>
+              <th className="hide-sm">Urządzenie </th>
+
+              <th className="hide-sm">Koszt </th>
+              <th className="hide-sm">Status </th>
+              <th />
+              <th />
+              <th />
+            </tr>
+          </thead>
+          <tbody>{table}</tbody>
+        </table>
+      </div>
     </Fragment>
   );
 };

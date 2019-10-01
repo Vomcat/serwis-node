@@ -1,4 +1,4 @@
-/*import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -176,7 +176,11 @@ const EditRepair = ({
             </div>
           </div>
           <div className="btn-group mr-2"></div>
-          <input type="submit" className="btn btn-primary my-1" />
+          <input
+            type="submit"
+            value="zapisz"
+            className="btn btn-primary my-1 btn-lg btn-block"
+          />
         </form>
       </div>
     </Fragment>
@@ -199,4 +203,3 @@ export default connect(
   mapStateToProps,
   { addNewRepair }
 )(withRouter(EditRepair));
-*/
