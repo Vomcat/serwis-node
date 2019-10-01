@@ -5,15 +5,10 @@ import { connect } from "react-redux";
 import { getAllRepairs } from "../../actions/repairs";
 import { deleteRepair } from "../../actions/repairs";
 
-const Repairs = ({
-  history,
-  repair: { repairs },
-  getAllRepairs,
-  deleteRepair
-}) => {
+const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
   useEffect(() => {
     getAllRepairs();
-  }, []);
+  }, [getAllRepairs]);
 
   console.log("repairs to display", repairs);
   console.log("delete", deleteRepair);
@@ -32,15 +27,14 @@ const Repairs = ({
         <td>{repair.status}</td>
         {console.log("naprawa", repair)}
         <td>
-          <Link to="/editRepair" className="btn btn-warning">
+          <Link to={`/editRepair/${repair._id}`} className='btn btn-warning'>
             Edytuj
           </Link>
         </td>
         <td>
           <button
             onClick={() => deleteRepair(repair._id)}
-            className="btn btn-danger"
-          >
+            className='btn btn-danger'>
             Usuń
           </button>
         </td>
@@ -49,22 +43,22 @@ const Repairs = ({
 
   return (
     <Fragment>
-      <div className="container">
+      <div className='container'>
         <h2>Naprawy</h2>
         {console.log(repairs)}
 
-        <table className="table  table-hover ">
+        <table className='table  table-hover '>
           <thead>
             <tr>
-              <th className="hide-sm">Numer naprawy</th>
+              <th className='hide-sm'>Numer naprawy</th>
               <th>Imie</th>
-              <th className="hide-sm">Nazwisko</th>
-              <th className="hide-sm">Nr.telefonu</th>
-              <th className="hide-sm">Email</th>
-              <th className="hide-sm">Urządzenie </th>
+              <th className='hide-sm'>Nazwisko</th>
+              <th className='hide-sm'>Nr.telefonu</th>
+              <th className='hide-sm'>Email</th>
+              <th className='hide-sm'>Urządzenie </th>
 
-              <th className="hide-sm">Koszt </th>
-              <th className="hide-sm">Status </th>
+              <th className='hide-sm'>Koszt </th>
+              <th className='hide-sm'>Status </th>
               <th />
               <th />
               <th />

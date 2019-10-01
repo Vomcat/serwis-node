@@ -32,7 +32,7 @@ export default function(state = initialState, action) {
     case GET_REPAIR:
       return {
         ...state,
-        repairs: state.repairs.filter(repair => repair._id !== payload),
+        repair: payload,
         loading: false
       };
     case GET_REPAIRS:

@@ -4,6 +4,7 @@ import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
 import NewUser from "./components/auth/NewUser";
 import Repairs from "./components/repairs/Repairs";
+import Repair from "./components/repairs/Repair";
 import NewRepair from "./components/repairs/NewRepair";
 import EditRepair from "./components/repairs/EditRepair";
 import PrivateRoutes from "./components/routes/PrivateRoutes";
@@ -37,8 +38,13 @@ const App = () => {
             <Route exact path='/login' component={Login} />
             <PrivateRoutes exact path='/new' component={NewUser} />
             <PrivateRoutes exact path='/repairs' component={Repairs} />
+            <PrivateRoutes exact path='/repair/:id' component={Repair} />
             <PrivateRoutes exact path='/newRepair' component={NewRepair} />
-            <PrivateRoutes exact path='/editRepair' component={EditRepair} />
+            <PrivateRoutes
+              exact
+              path='/editRepair/:id'
+              component={EditRepair}
+            />
           </Switch>
         </Fragment>
       </Router>

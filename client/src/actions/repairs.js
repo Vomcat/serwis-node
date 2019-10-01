@@ -26,9 +26,9 @@ export const getAllRepairs = () => async dispatch => {
   }
 };
 
-export const getRepair = () => async dispatch => {
+export const getRepair = id => async dispatch => {
   try {
-    const res = await axios.get("api/repairs/");
+    const res = await axios.get(`api/repairs/${id}`);
     console.log("this is a sever response", res.data);
     dispatch({
       type: GET_REPAIR,
