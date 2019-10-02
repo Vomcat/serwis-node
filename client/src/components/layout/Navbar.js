@@ -12,14 +12,20 @@ const Navbar = ({ auth: { isAuthenticated, loading, logout } }) => {
           Naprawy
         </Link>
       </li>
-      <li className="nav-item">
-        <Link className="nav-link" to="/new">
-          Dodaj
-        </Link>
-      </li>
+
       <li className="nav-item">
         <Link className="nav-link" to="/newRepair">
           Nowa naprawa
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/new">
+          Dodaj użytkownika
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/users">
+          Użytkownicy
         </Link>
       </li>
       <li className="nav-item">
@@ -42,7 +48,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, logout } }) => {
     <nav className="navbar navbar-expand-md navbar-dark  bg-dark navbar bg-dark">
       <h2>
         <Link className="nav-link" to="/">
-          <i class="navbar-brand" /> Serwis
+          <i className="navbar-brand" /> Serwis
         </Link>
       </h2>
       {!loading && (

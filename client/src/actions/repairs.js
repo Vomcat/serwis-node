@@ -76,19 +76,20 @@ export const addNewRepair = (
 };
 
 export const deleteRepair = id => async dispatch => {
-  if (window.confirm("Napewnu usunąć? "))
+  if (window.confirm("Napewno usunąć? "))
     try {
       const res = await axios.delete(`api/repairs/${id}`);
 
       dispatch({
-        tye: DELETE_REPAIR,
+        type: DELETE_REPAIR,
         payload: id
       });
       dispatch(setAlert("Naprawa usunięta", "success"));
     } catch (err) {
-      dispatch({
-        type: REPAIR_ERROR,
-        payload: { msg: err.response.statusText, status: err.response.status }
-      });
+      console.log(err);
+      // dispatch({
+      //   type: REPAIR_ERROR,
+      //   payload: { msg: err.response.statusText, status: err.response.status }
+      // });
     }
 };

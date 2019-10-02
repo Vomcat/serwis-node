@@ -55,7 +55,6 @@ router.post(
         status: req.body.status,
         user: req.user.id
       });
-      console.log(user);
 
       const repair = await newRepair.save();
 

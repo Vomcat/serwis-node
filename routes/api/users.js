@@ -28,7 +28,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, first_name, last_name, email, password } = req.body;
+    const { name, first_name, last_name, email, password, status } = req.body;
 
     try {
       let user = await User.findOne({ email });
@@ -44,7 +44,8 @@ router.post(
         first_name,
         last_name,
         email,
-        password
+        password,
+        status
       });
 
       //Szyfrowanie hasla
@@ -53,6 +54,7 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
+      res.json(user);
 
       // Return JWT
       /*
@@ -77,5 +79,15 @@ router.post(
     }
   }
 );
+
+router.get("/", auth, async (req, res) => {
+  try {
+    const users = await User.find().sort({ date: -1 });
+    res.json(users);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("ServerError");
+  }
+});
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
-  ADD_USER_SUCCES,
-  ADD_USER_FAIL,
+  //ADD_USER_SUCCES,
+  // ADD_USER_FAIL,
   USER_AUTH,
   AUTH_ERROR,
   LOGIN_SUCCES,
@@ -28,13 +28,14 @@ export const loadUser = () => async dispatch => {
     });
   }
 };
-
+/*
 export const add = ({
   name,
   first_name,
   last_name,
   email,
-  password
+  password,
+  status
 }) => async dispatch => {
   const config = {
     headers: {
@@ -42,7 +43,14 @@ export const add = ({
     }
   };
 
-  const body = JSON.stringify({ name, first_name, last_name, email, password });
+  const body = JSON.stringify({
+    name,
+    first_name,
+    last_name,
+    email,
+    password,
+    status
+  });
   try {
     const res = await axios.post("/api/users", body, config);
 
@@ -57,6 +65,7 @@ export const add = ({
     });
   }
 };
+*/
 
 //login
 export const login = (email, password) => async dispatch => {

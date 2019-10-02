@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
-import { add } from "../../actions/auth";
+import { add } from "../../actions/users";
 import PropTypes from "prop-types";
 
-const NewUser = ({ setAlert, add }) => {
+const NewUser = ({ setAlert, add, history }) => {
   const [formData, setFormData] = useState({
     name: "",
     first_name: "",
@@ -24,15 +24,16 @@ const NewUser = ({ setAlert, add }) => {
     password2,
     status
   } = formData;
+
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async e => {
+  const onSubmit = e => {
     e.preventDefault();
     if (password !== password2) {
       setAlert("Hasła powinnny być takie same", "danger");
     } else {
-      add({ name, first_name, last_name, email, password });
+      add({ formData, history });
       /*
       const newUser = {
         name,
@@ -141,11 +142,13 @@ const NewUser = ({ setAlert, add }) => {
 
 NewUser.propTypes = {
   setAlert: PropTypes.func.isRequired,
-  add: PropTypes.func.isRequired
+  add: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  user: state.user
 });
 
 export default connect(

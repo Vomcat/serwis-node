@@ -16,6 +16,7 @@ const initialState = {
 
 export default function(state = initialState, action) {
   const { type, payload } = action;
+
   switch (type) {
     case ADD_REPAIR:
       return {
@@ -26,13 +27,13 @@ export default function(state = initialState, action) {
     case UPDATE_REPAIR:
       return {
         ...state,
-        post: payload,
+        repair: payload,
         loading: false
       };
     case GET_REPAIR:
       return {
         ...state,
-        repair: payload,
+        repair: [...state.repairs, payload],
         loading: false
       };
     case GET_REPAIRS:
