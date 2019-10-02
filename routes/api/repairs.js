@@ -40,8 +40,6 @@ router.post(
     }
 
     try {
-      const user = await User.findById(req.user.id).select("-password");
-
       const newRepair = new Repairs({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
@@ -52,8 +50,7 @@ router.post(
         imei: req.body.imei,
         description: req.body.description,
         cost: req.body.cost,
-        status: req.body.status,
-        user: req.user.id
+        status: req.body.status
       });
 
       const repair = await newRepair.save();

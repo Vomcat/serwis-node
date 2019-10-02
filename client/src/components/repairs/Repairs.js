@@ -10,8 +10,9 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
     getAllRepairs();
   }, [getAllRepairs]);
 
-  console.log("repairs to display", repairs);
-  console.log("delete", deleteRepair);
+  const [search, setSearch] = React.useState("");
+  const onChange = e => setSearch(e.target.value);
+  //console.log("repairs to display", repairs);
 
   const table =
     //repairs &&
@@ -25,7 +26,7 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
         <td>{repair.device}</td>
         <td>{repair.cost}</td>
         <td>{repair.status}</td>
-        {console.log("naprawa", repair)}
+
         <td>
           <Link to={`/editRepair/${repair._id}`} className='btn btn-warning'>
             Edytuj
@@ -45,8 +46,21 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
     <Fragment>
       <div className='container'>
         <h2>Naprawy</h2>
-        {console.log(repairs)}
-
+        <form className='form-inline my-2 my-lg-0'>
+          <input
+            className='form-control mr-sm-2'
+            type='search'
+            placeholder='Search'
+            aria-label='Search'
+            value={search}
+            onChange={e => onChange(e)}
+          />
+          <button
+            className='btn btn-outline-success my-2 my-sm-0'
+            type='submit'>
+            Search
+          </button>
+        </form>
         <table className='table  table-hover '>
           <thead>
             <tr>

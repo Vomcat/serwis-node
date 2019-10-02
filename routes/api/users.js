@@ -90,4 +90,19 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    await user.remove();
+    res.json({ msg: "Użytkownik usunięty" });
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ msg: "Błąd" });
+    }
+    res.status(500).send("ServerError");
+  }
+});
+
 module.exports = router;

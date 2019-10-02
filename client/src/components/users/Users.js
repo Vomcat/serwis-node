@@ -18,16 +18,15 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
       <td>{user.first_name}</td>
       <td>{user.last_name}</td>
       <td>{user.email}</td>
-      <td>{user.password}</td>
       <td>{user.status}</td>
       {console.log("naprawa", user)}
       <td>
-        <Link to={`/editRepair/${user._id}`} className="btn btn-warning">
+        <Link to={`/editRepair/${user._id}`} className='btn btn-warning'>
           Edytuj
         </Link>
       </td>
       <td>
-        <button onClick={() => deleteUser(user._id)} className="btn btn-danger">
+        <button onClick={() => deleteUser(user._id)} className='btn btn-danger'>
           Usuń
         </button>
       </td>
@@ -36,22 +35,18 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
 
   return (
     <Fragment>
-      <div className="container">
+      <div className='container'>
         <h2>Naprawy</h2>
         {console.log(users)}
 
-        <table className="table  table-hover ">
+        <table className='table  table-hover '>
           <thead>
             <tr>
-              <th className="hide-sm">Login</th>
-              <th>Imie</th>
-              <th className="hide-sm">Nazwisko</th>
-
-              <th className="hide-sm">Email</th>
-              <th className="hide-sm">Hasło </th>
-
-              <th className="hide-sm">Status </th>
-              <th />
+              <th className='hide-sm'>Login</th>
+              <th className='hide-sm'>Imie</th>
+              <th className='hide-sm'>Nazwisko</th>
+              <th className='hide-sm'>Email</th>
+              <th className='hide-sm'>Status </th>
               <th />
               <th />
             </tr>

@@ -33,18 +33,18 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar />
-          <Route exact path="/" component={Landing} />
+          <Route exact path='/' component={Landing} />
           <Alert />
           <Switch>
-            <Route exact path="/login" component={Login} />
-            <PrivateRoutes exact path="/new" component={NewUser} />
-            <PrivateRoutes exact path="/users" component={Users} />
-            <PrivateRoutes exact path="/repairs" component={Repairs} />
-            <PrivateRoutes exact path="/repair/:id" component={Repair} />
-            <PrivateRoutes exact path="/newRepair" component={NewRepair} />
+            <Route exact path='/login' component={Login} />
+            <PrivateRoutes exact path='/new' component={NewUser} />
+            <PrivateRoutes exact path='/users' component={Users} />
+            <PrivateRoutes exact path='/repairs' component={Repairs} />
+            <PrivateRoutes exact path='/repair/:id' component={Repair} />
+            <PrivateRoutes exact path='/newRepair' component={NewRepair} />
             <PrivateRoutes
               exact
-              path="/editRepair/:id"
+              path='/editRepair/:id'
               component={EditRepair}
             />
           </Switch>

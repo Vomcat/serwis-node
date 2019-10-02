@@ -34,105 +34,83 @@ const NewUser = ({ setAlert, add, history }) => {
       setAlert("Hasła powinnny być takie same", "danger");
     } else {
       add({ formData, history });
-      /*
-      const newUser = {
-        name,
-        first_name,
-        last_name,
-        email,
-        password,
-        status
-      };
-
-      try {
-        const config = {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        };
-        const body = JSON.stringify(newUser);
-        const res = await axios.post("/api/users", body, config);
-        console.log(res.data);
-      } catch (err) {
-        console.error(err.response.data);
-      }*/
     }
   };
   return (
     <Fragment>
-      <div className="text-center">
-        <form className="form-signin" onSubmit={e => onSubmit(e)}>
-          <h1 className="h3 mb-3 font-weight-normal">
+      <div className='text-center'>
+        <form className='form-signin' onSubmit={e => onSubmit(e)}>
+          <h1 className='h3 mb-3 font-weight-normal'>
             Dodaj nowego pracownika
           </h1>
 
           <input
-            type="text"
-            name="name"
-            className="form-control"
-            placeholder=" Nazwa użytkownika"
+            type='text'
+            name='name'
+            className='form-control'
+            placeholder=' Nazwa użytkownika'
             value={name}
             onChange={e => onChange(e)}
             required
           />
           <input
-            type="text"
-            name="first_name"
-            className="form-control"
-            placeholder="Imię"
+            type='text'
+            name='first_name'
+            className='form-control'
+            placeholder='Imię'
             value={first_name}
             onChange={e => onChange(e)}
             required
           />
           <input
-            type="text"
-            name="last_name"
-            className="form-control"
-            placeholder="Nazwisko"
+            type='text'
+            name='last_name'
+            className='form-control'
+            placeholder='Nazwisko'
             value={last_name}
             onChange={e => onChange(e)}
             required
           />
           <input
-            type="email"
-            name="email"
-            className="form-control"
-            placeholder=" Email"
+            type='email'
+            name='email'
+            className='form-control'
+            placeholder=' Email'
             value={email}
             onChange={e => onChange(e)}
             required
           />
 
           <input
-            type="password"
-            name="password"
-            className="form-control"
-            placeholder="Hasło"
+            type='password'
+            name='password'
+            className='form-control'
+            placeholder='Hasło'
             value={password}
             onChange={e => onChange(e)}
             required
           />
           <input
-            type="password"
-            name="password2"
-            className="form-control"
-            placeholder="Powtórz hasło"
+            type='password'
+            name='password2'
+            className='form-control'
+            placeholder='Powtórz hasło'
             value={password2}
             onChange={e => onChange(e)}
             required
           />
-          <div className="form-group">
-            <select name="status" value={status} onChange={e => onChange(e)}>
-              <option value="0">Rodzaj użytkownika</option>
-              <option value="admin">Admin</option>
-              <option value="user"> User</option>
+          <div className='form-group'>
+            <select name='status' value={status} onChange={e => onChange(e)}>
+              <option value='0'>Rodzaj użytkownika</option>
+              <option value='admin'>Admin</option>
+              <option value='user'> User</option>
             </select>
           </div>
 
           <input
-            type="submit"
+            type='submit'
             className='"btn btn-lg btn-btn btn-lg btn-secondary btn-block'
-            value="Dodaj"
+            value='Dodaj'
           />
         </form>
       </div>

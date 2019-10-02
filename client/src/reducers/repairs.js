@@ -1,6 +1,5 @@
 import {
   ADD_REPAIR,
-  UPDATE_REPAIR,
   GET_REPAIR,
   GET_REPAIRS,
   DELETE_REPAIR,
@@ -24,16 +23,11 @@ export default function(state = initialState, action) {
         repair: [...state.repairs, payload],
         loading: false
       };
-    case UPDATE_REPAIR:
-      return {
-        ...state,
-        repair: payload,
-        loading: false
-      };
+
     case GET_REPAIR:
       return {
         ...state,
-        repair: [...state.repairs, payload],
+        repairs: payload,
         loading: false
       };
     case GET_REPAIRS:

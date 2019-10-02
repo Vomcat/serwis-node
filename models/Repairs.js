@@ -42,10 +42,6 @@ const RepairsSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true
-  },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "user"
   }
 });
 

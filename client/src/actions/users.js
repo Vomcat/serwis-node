@@ -40,19 +40,16 @@ export const getAllUsers = () => async dispatch => {
 };
 
 export const deleteUser = id => async dispatch => {
-  if (window.confirm("Napewnu usunąć? "))
+  if (window.confirm("Napewno usunąć? "))
     try {
-      const res = await axios.delete(`api/repairs/${id}`);
+      const res = await axios.delete(`api/users/${id}`);
 
       dispatch({
-        tye: DELETE_USER,
+        type: DELETE_USER,
         payload: id
       });
-      dispatch(setAlert("Naprawa usunięta", "success"));
+      dispatch(setAlert("Użytkowinik usunięty", "success"));
     } catch (err) {
-      dispatch({
-        type: USER_ERROR,
-        payload: { msg: err.response.statusText, status: err.response.status }
-      });
+      console.log(err);
     }
 };

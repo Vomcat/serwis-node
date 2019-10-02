@@ -6,8 +6,7 @@ import {
   GET_REPAIR,
   REPAIR_ERROR,
   ADD_REPAIR,
-  DELETE_REPAIR,
-  UPDATE_REPAIR
+  DELETE_REPAIR
 } from "./type";
 
 //wszystkie naprawy
@@ -29,16 +28,17 @@ export const getAllRepairs = () => async dispatch => {
 export const getRepair = id => async dispatch => {
   try {
     const res = await axios.get(`api/repairs/${id}`);
-    console.log("this is a sever response", res.data);
+
     dispatch({
       type: GET_REPAIR,
       payload: res.data
     });
   } catch (err) {
-    dispatch({
+    console.log("errorek", err);
+    /*    dispatch({
       type: REPAIR_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
-    });
+    }); */
   }
 };
 
