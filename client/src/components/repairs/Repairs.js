@@ -14,6 +14,8 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
   const onChange = e => setSearch(e.target.value);
   //console.log("repairs to display", repairs);
 
+  const result = repairs.find(({ _id }) => _id === search);
+  console.log("wynik", result);
   const table =
     //repairs &&
     repairs.map(repair => (
@@ -28,14 +30,15 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
         <td>{repair.status}</td>
 
         <td>
-          <Link to={`/editRepair/${repair._id}`} className='btn btn-warning'>
+          <Link to={`/editRepair/${repair._id}`} className="btn btn-warning">
             Edytuj
           </Link>
         </td>
         <td>
           <button
             onClick={() => deleteRepair(repair._id)}
-            className='btn btn-danger'>
+            className="btn btn-danger"
+          >
             Usuń
           </button>
         </td>
@@ -44,35 +47,36 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
 
   return (
     <Fragment>
-      <div className='container'>
+      <div className="container">
         <h2>Naprawy</h2>
-        <form className='form-inline my-2 my-lg-0'>
+        <form className="form-inline my-2 my-lg-0">
           <input
-            className='form-control mr-sm-2'
-            type='search'
-            placeholder='Search'
-            aria-label='Search'
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
             value={search}
             onChange={e => onChange(e)}
           />
           <button
-            className='btn btn-outline-success my-2 my-sm-0'
-            type='submit'>
+            className="btn btn-outline-success my-2 my-sm-0"
+            type="submit"
+          >
             Search
           </button>
         </form>
-        <table className='table  table-hover '>
+        <table className="table  table-hover ">
           <thead>
             <tr>
-              <th className='hide-sm'>Numer naprawy</th>
+              <th className="hide-sm">Numer naprawy</th>
               <th>Imie</th>
-              <th className='hide-sm'>Nazwisko</th>
-              <th className='hide-sm'>Nr.telefonu</th>
-              <th className='hide-sm'>Email</th>
-              <th className='hide-sm'>Urządzenie </th>
+              <th className="hide-sm">Nazwisko</th>
+              <th className="hide-sm">Nr.telefonu</th>
+              <th className="hide-sm">Email</th>
+              <th className="hide-sm">Urządzenie </th>
 
-              <th className='hide-sm'>Koszt </th>
-              <th className='hide-sm'>Status </th>
+              <th className="hide-sm">Koszt </th>
+              <th className="hide-sm">Status </th>
               <th />
               <th />
               <th />
