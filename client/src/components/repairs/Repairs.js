@@ -12,77 +12,100 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
 
   const [search, setSearch] = React.useState("");
   const onChange = e => setSearch(e.target.value);
-  //console.log("repairs to display", repairs);
+  // console.log("repairs to display", repairs);
 
+  // const result = repairs.find(({ _id }) => _id === search);
   const result = repairs.find(({ _id }) => _id === search);
-  console.log("wynik", result);
+
   const table =
     //repairs &&
-    repairs.map(repair => (
-      <tr key={repair._id}>
-        <td>{repair._id}</td>
-        <td>{repair.first_name}</td>
-        <td>{repair.last_name}</td>
-        <td>{repair.phone_number}</td>
-        <td>{repair.email}</td>
-        <td>{repair.device}</td>
-        <td>{repair.cost}</td>
-        <td>{repair.status}</td>
+    result ? (
+      <tr>
+        <td>{result._id}</td>
 
+        <td>{result.first_name}</td>
+        <td>{result.last_name}</td>
+        <td>{result.phone_number}</td>
+        <td>{result.email}</td>
+        <td>{result.device}</td>
+        <td>{result.cost}</td>
+        <td>{result.status}</td>
         <td>
-          <Link to={`/editRepair/${repair._id}`} className="btn btn-warning">
+          <Link to={`/editRepair/${result._id}`} className='btn btn-warning'>
             Edytuj
           </Link>
         </td>
         <td>
           <button
-            onClick={() => deleteRepair(repair._id)}
-            className="btn btn-danger"
-          >
+            onClick={() => deleteRepair(result._id)}
+            className='btn btn-danger'>
             Usuń
           </button>
         </td>
       </tr>
-    ));
+    ) : (
+      repairs.map(repair => (
+        <tr key={repair._id}>
+          <td>{repair._id}</td>
+          <td>{repair.first_name}</td>
+          <td>{repair.last_name}</td>
+          <td>{repair.phone_number}</td>
+          <td>{repair.email}</td>
+          <td>{repair.device}</td>
+          <td>{repair.cost}</td>
+          <td>{repair.status}</td>
+
+          <td>
+            <Link to={`/editRepair/${repair._id}`} className='btn btn-warning'>
+              Edytuj
+            </Link>
+          </td>
+          <td>
+            <button
+              onClick={() => deleteRepair(repair._id)}
+              className='btn btn-danger'>
+              Usuń
+            </button>
+          </td>
+        </tr>
+      ))
+    );
 
   return (
     <Fragment>
-      <div className="container">
+      <div className='container'>
         <h2>Naprawy</h2>
-        <form className="form-inline my-2 my-lg-0">
+        <form className='form-inline my-2 my-lg-0'>
           <input
-            className="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
+            className='form-control mr-sm-2'
+            type='search'
+            placeholder='Search'
+            aria-label='Search'
             value={search}
             onChange={e => onChange(e)}
           />
-          <button
-            className="btn btn-outline-success my-2 my-sm-0"
-            type="submit"
-          >
-            Search
-          </button>
         </form>
-        <table className="table  table-hover ">
+        <table className='table  table-hover '>
           <thead>
             <tr>
-              <th className="hide-sm">Numer naprawy</th>
+              <th className='hide-sm'>Numer naprawy</th>
               <th>Imie</th>
-              <th className="hide-sm">Nazwisko</th>
-              <th className="hide-sm">Nr.telefonu</th>
-              <th className="hide-sm">Email</th>
-              <th className="hide-sm">Urządzenie </th>
+              <th className='hide-sm'>Nazwisko</th>
+              <th className='hide-sm'>Nr.telefonu</th>
+              <th className='hide-sm'>Email</th>
+              <th className='hide-sm'>Urządzenie </th>
 
-              <th className="hide-sm">Koszt </th>
-              <th className="hide-sm">Status </th>
+              <th className='hide-sm'>Koszt </th>
+              <th className='hide-sm'>Status </th>
               <th />
               <th />
               <th />
             </tr>
           </thead>
-          <tbody>{table}</tbody>
+          <tbody>
+            {table}
+            {console.log("wynik", result)}
+          </tbody>
         </table>
       </div>
     </Fragment>
