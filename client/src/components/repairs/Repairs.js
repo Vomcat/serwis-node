@@ -4,8 +4,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getAllRepairs } from "../../actions/repairs";
 import { deleteRepair } from "../../actions/repairs";
-
-const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
+import { getRepair } from "../../actions/repairs";
+const Repairs = ({
+  repair: { repairs },
+  getAllRepairs,
+  deleteRepair,
+  getRepair
+}) => {
   useEffect(() => {
     getAllRepairs();
   }, [getAllRepairs]);
@@ -15,7 +20,9 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
   // console.log("repairs to display", repairs);
 
   // const result = repairs.find(({ _id }) => _id === search);
-  const result = repairs.find(({ _id }) => _id === search);
+  const result =
+    repairs.find(({ _id }) => _id === search) ||
+    repairs.find(({ last_name }) => last_name === search);
 
   const table =
     //repairs &&
@@ -31,14 +38,22 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
         <td>{result.cost}</td>
         <td>{result.status}</td>
         <td>
-          <Link to={`/editRepair/${result._id}`} className='btn btn-warning'>
-            Edytuj
+          <Link to={`/editRepair/${result._id}`} className="btn btn-warning">
+            <span onClick={() => getRepair(result._id)}>Edytuj</span>
           </Link>
+
+          <button
+            onClick={() => getRepair(result._id)}
+            className="btn btn-danger"
+          >
+            Usuń
+          </button>
         </td>
         <td>
           <button
             onClick={() => deleteRepair(result._id)}
-            className='btn btn-danger'>
+            className="btn btn-danger"
+          >
             Usuń
           </button>
         </td>
@@ -56,14 +71,15 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
           <td>{repair.status}</td>
 
           <td>
-            <Link to={`/editRepair/${repair._id}`} className='btn btn-warning'>
+            <Link to={`/editRepair/${repair._id}`} className="btn btn-warning">
               Edytuj
             </Link>
           </td>
           <td>
             <button
               onClick={() => deleteRepair(repair._id)}
-              className='btn btn-danger'>
+              className="btn btn-danger"
+            >
               Usuń
             </button>
           </td>
@@ -73,111 +89,31 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
 
   return (
     <Fragment>
-      <div className='container'>
+      <div className="container">
         <h2>Naprawy</h2>
-        <form className='form-inline my-2 my-lg-0'>
+        <form className="form-inline my-2 my-lg-0">
           <input
-            className='form-control mr-sm-2'
-            type='search'
-            placeholder='Search'
-            aria-label='Search'
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
             value={search}
             onChange={e => onChange(e)}
           />
         </form>
-        <table className='table  table-hover '>
+        <table className="table  table-hover ">
           <thead>
             <tr>
-              <th className='hide-sm'>Numer naprawy</th>
+              <th className="hide-sm">Numer naprawy</th>
               <th>Imie</th>
-              <th className='hide-sm'>Nazwisko</th>
-              <th className='hide-sm'>Nr.telefonu</th>
-              <th className='hide-sm'>Email</th>
-              <th className='hide-sm'>Urządzenie </th>
+              <th className="hide-sm">Nazwisko</th>
+              <th className="hide-sm">Nr.telefonu</th>
+              <th className="hide-sm">Email</th>
+              <th className="hide-sm">Urządzenie </th>
 
-              <th className='hide-sm'>Koszt </th>
-              <th className='hide-sm'>Status </th>
+              <th className="hide-sm">Koszt </th>
+              <th className="hide-sm">Status </th>
               <th />
-              <th />
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {table}
-            {console.log("wynik", result)}
-          </tbody>
-        </table>
-      </div>
-    </Fragment>
-  );
-};
-
-Repairs.propTypes = {
-  getAllRepairs: PropTypes.func.isRequired,
-  deleteRepair: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  repair: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth,
-  repair: state.repairs
-});
-
-export default connect(
-  mapStateToProps,
-  { getAllRepairs, deleteRepair }
-)(Repairs);
-
-/*const Repairs = ({ getAllRepairs, repair: { repairs }, deleteRepair }) => {
-  useEffect(() => {
-    getAllRepairs();
-  }, [getAllRepairs]);
-
-  const table = repairs.map(all => (
-    <tr key={all._id}>
-      <td>{all._id}</td>
-      <td>{all.first_name}</td>
-      <td>{all.last_name}</td>
-      <td>{all.phone_number}</td>
-      <td>{all.email}</td>
-      <td>{all.device}</td>
-      <td>{all.imei}</td>
-      <td>{all.code}</td>
-      <td>{all.description}</td>
-      <td>{all.cost}</td>
-      <td>{all.status}</td>
-      <td>
-        <Link to='/editRepair'>Edytuj</Link>
-      </td>
-      <td>
-        <button
-          onClick={() => deleteRepair(all._id)}
-          className='btn btn-danger'>
-          Usuń
-        </button>
-      </td>
-    </tr>
-  ));
-
-  return (
-    <Fragment>
-      <div className='container'>
-        <h2>Naprawy</h2>
-        <table className='table table-striped '>
-          <thead>
-            <tr>
-              <th className='hide-sm'>Numer naprawy</th>
-              <th>Imie</th>
-              <th className='hide-sm'>Nazwisko</th>
-              <th className='hide-sm'>Nr.telefonu</th>
-              <th className='hide-sm'>Email</th>
-              <th className='hide-sm'>Nazwa urządzenie</th>
-              <th className='hide-sm'>Numer seryjny/Imei</th>
-              <th className='hide-sm'>Kod blokady</th>
-              <th className='hide-sm'>Opis usterki</th>
-              <th className='hide-sm'>Koszt naprawy</th>
-              <th className='hide-sm'>Status</th>
               <th />
               <th />
             </tr>
@@ -190,19 +126,20 @@ export default connect(
 };
 
 Repairs.propTypes = {
-  getAllRepairs: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  getAllRepairs: PropTypes.func.isRequired,
+  getRepair: PropTypes.func.isRequired,
+  deleteRepair: PropTypes.func.isRequired,
+
   repair: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  repair: state.repair,
-  delete: state.delete
+  repair: state.repairs
 });
 
 export default connect(
   mapStateToProps,
-  { getAllRepairs, deleteRepair }
+  { getAllRepairs, deleteRepair, getRepair }
 )(Repairs);
-*/

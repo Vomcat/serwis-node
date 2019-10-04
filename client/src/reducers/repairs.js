@@ -27,7 +27,7 @@ export default function(state = initialState, action) {
     case GET_REPAIR:
       return {
         ...state,
-        repairs: payload,
+        repair: payload,
         loading: false
       };
     case GET_REPAIRS:

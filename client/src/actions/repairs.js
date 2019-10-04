@@ -27,18 +27,14 @@ export const getAllRepairs = () => async dispatch => {
 
 export const getRepair = id => async dispatch => {
   try {
-    const res = await axios.get(`api/repairs/${id}`);
+    const res = await axios.get(`/api/repairs/${id}`);
 
     dispatch({
       type: GET_REPAIR,
       payload: res.data
     });
   } catch (err) {
-    console.log("errorek", err);
-    /*    dispatch({
-      type: REPAIR_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    }); */
+    console.log(err);
   }
 };
 
