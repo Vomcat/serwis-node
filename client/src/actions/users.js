@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_USER_SUCCES, USER_ERROR, GET_USERS, DELETE_USER } from "./type";
+import { ADD_USER, USER_ERROR, GET_USERS, GET_USER, DELETE_USER } from "./type";
 import { setAlert } from "./alert";
 
 export const add = ({ formData, history }) => async dispatch => {
@@ -12,7 +12,7 @@ export const add = ({ formData, history }) => async dispatch => {
     const res = await axios.post("/api/users", formData, config);
 
     dispatch({
-      type: ADD_USER_SUCCES,
+      type: ADD_USER,
       payload: res.data
     });
     dispatch(setAlert("Dodano nowego użytkownika"));
@@ -36,6 +36,19 @@ export const getAllUsers = () => async dispatch => {
     dispatch({
       type: USER_ERROR
     });
+  }
+};
+
+export const getUser = id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/users/${id}`);
+
+    dispatch({
+      type: GET_USER,
+      payload: res.data
+    });
+  } catch (err) {
+    console.log(err);
   }
 };
 

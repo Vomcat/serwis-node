@@ -10,7 +10,7 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
     getAllUsers();
   }, [getAllUsers]);
 
-  console.log("repairs to display", users);
+  console.log("uzytkownicy", users);
 
   const table = users.map(user => (
     <tr key={user._id}>
@@ -19,9 +19,9 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
       <td>{user.last_name}</td>
       <td>{user.email}</td>
       <td>{user.status}</td>
-      {console.log("naprawa", user)}
+
       <td>
-        <Link to={`/editRepair/${user._id}`} className='btn btn-warning'>
+        <Link to={`/editUser/${user._id}`} className='btn btn-warning'>
           Edytuj
         </Link>
       </td>

@@ -90,6 +90,25 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// get  repairs by id
+router.get("/:id", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ msg: "Nie am takiego użytkownika" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ msg: "Nie am takiej użytkownika" });
+    }
+    res.status(500).send("ServerError");
+  }
+});
+
 router.delete("/:id", auth, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);

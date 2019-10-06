@@ -80,7 +80,7 @@ export const deleteRepair = id => async dispatch => {
         type: DELETE_REPAIR,
         payload: id
       });
-      dispatch(setAlert("Naprawa usunięta", "success"));
+      dispatch(setAlert("Naprawa usunięta"));
     } catch (err) {
       console.log(err);
       // dispatch({

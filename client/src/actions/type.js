@@ -1,9 +1,10 @@
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
-export const ADD_USER_SUCCES = "ADD_USER_SUCCES";
+export const ADD_USER = "ADD_USER";
 export const USER_ERROR = "USER_ERROR";
 export const DELETE_USER = "DELETE_USER";
 export const GET_USERS = "GET_USERS";
+export const GET_USER = "GET_USER";
 export const USER_AUTH = "USER_AUTH";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const LOGIN_SUCCES = "LOGIN_SUCCES";

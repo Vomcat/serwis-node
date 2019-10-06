@@ -6,6 +6,7 @@ import { getAllRepairs } from "../../actions/repairs";
 import { deleteRepair } from "../../actions/repairs";
 import { getRepair } from "../../actions/repairs";
 const Repairs = ({
+  auth,
   repair: { repairs },
   getAllRepairs,
   deleteRepair,
@@ -38,22 +39,14 @@ const Repairs = ({
         <td>{result.cost}</td>
         <td>{result.status}</td>
         <td>
-          <Link to={`/editRepair/${result._id}`} className="btn btn-warning">
+          <Link to={`/editRepair/${result._id}`} className='btn btn-warning'>
             <span onClick={() => getRepair(result._id)}>Edytuj</span>
           </Link>
-
-          <button
-            onClick={() => getRepair(result._id)}
-            className="btn btn-danger"
-          >
-            Usuń
-          </button>
         </td>
         <td>
           <button
             onClick={() => deleteRepair(result._id)}
-            className="btn btn-danger"
-          >
+            className='btn btn-danger'>
             Usuń
           </button>
         </td>
@@ -71,15 +64,14 @@ const Repairs = ({
           <td>{repair.status}</td>
 
           <td>
-            <Link to={`/editRepair/${repair._id}`} className="btn btn-warning">
+            <Link to={`/editRepair/${repair._id}`} className='btn btn-warning'>
               Edytuj
             </Link>
           </td>
           <td>
             <button
               onClick={() => deleteRepair(repair._id)}
-              className="btn btn-danger"
-            >
+              className='btn btn-danger'>
               Usuń
             </button>
           </td>
@@ -89,30 +81,30 @@ const Repairs = ({
 
   return (
     <Fragment>
-      <div className="container">
+      <div className='container'>
         <h2>Naprawy</h2>
-        <form className="form-inline my-2 my-lg-0">
+        <form className='form-inline my-2 my-lg-0'>
           <input
-            className="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
+            className='form-control mr-sm-2'
+            type='search'
+            placeholder='Search'
+            aria-label='Search'
             value={search}
             onChange={e => onChange(e)}
           />
         </form>
-        <table className="table  table-hover ">
+        <table className='table  table-hover '>
           <thead>
             <tr>
-              <th className="hide-sm">Numer naprawy</th>
+              <th className='hide-sm'>Numer naprawy</th>
               <th>Imie</th>
-              <th className="hide-sm">Nazwisko</th>
-              <th className="hide-sm">Nr.telefonu</th>
-              <th className="hide-sm">Email</th>
-              <th className="hide-sm">Urządzenie </th>
+              <th className='hide-sm'>Nazwisko</th>
+              <th className='hide-sm'>Nr.telefonu</th>
+              <th className='hide-sm'>Email</th>
+              <th className='hide-sm'>Urządzenie </th>
 
-              <th className="hide-sm">Koszt </th>
-              <th className="hide-sm">Status </th>
+              <th className='hide-sm'>Koszt </th>
+              <th className='hide-sm'>Status </th>
               <th />
               <th />
               <th />

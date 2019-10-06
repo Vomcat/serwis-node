@@ -1,5 +1,5 @@
 import {
-  ADD_USER_SUCCES,
+  ADD_USER,
   GET_USERS,
   GET_USER,
   DELETE_USER,
@@ -17,7 +17,7 @@ export default function(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case ADD_USER_SUCCES:
+    case ADD_USER:
       return {
         ...state,
         user: [...state.users, payload],
@@ -27,6 +27,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         users: payload,
+        loading: false
+      };
+    case GET_USER:
+      return {
+        ...state,
+        user: payload,
         loading: false
       };
     case DELETE_USER:

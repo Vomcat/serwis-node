@@ -4,7 +4,6 @@ const { check, validationResult } = require("express-validator");
 const auth = require("../../middleware/auth");
 
 const Repairs = require("../../models/Repairs");
-const User = require("../../models/User");
 
 router.post(
   "/",
