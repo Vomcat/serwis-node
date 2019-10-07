@@ -90,7 +90,6 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// get  repairs by id
 router.get("/:id", auth, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);

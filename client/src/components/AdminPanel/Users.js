@@ -36,7 +36,7 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
   return (
     <Fragment>
       <div className='container'>
-        <h2>Naprawy</h2>
+        <h2>Użytkownicy</h2>
         {console.log(users)}
 
         <table className='table  table-hover '>

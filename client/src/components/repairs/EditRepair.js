@@ -9,7 +9,7 @@ const EditRepair = ({
   auth,
   repair: { repair, loading },
   getRepair,
-  addNewRepair,
+  updaterepair,
   history,
   match
 }) => {
@@ -59,7 +59,7 @@ const EditRepair = ({
 
   const onSubmit = e => {
     e.preventDefault();
-    addNewRepair(formData, history, true);
+    updaterepair(formData, history, true);
   };
 
   return repair === null ? (
