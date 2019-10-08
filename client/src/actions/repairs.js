@@ -38,11 +38,7 @@ export const getRepair = id => async dispatch => {
   }
 };
 
-export const addNewRepair = (
-  formData,
-  history,
-  edit = false
-) => async dispatch => {
+export const addNewRepair = (formData, history) => async dispatch => {
   try {
     const config = {
       headers: {
@@ -51,6 +47,31 @@ export const addNewRepair = (
     };
 
     const res = await axios.post("/api/repairs", formData, config);
+    dispatch({
+      type: ADD_REPAIR,
+      payload: res.data
+    });
+
+    dispatch(setAlert("Utworzono naprawę", "success"));
+
+    history.push("/repairs");
+  } catch (err) {
+    dispatch({
+      type: REPAIR_ERROR,
+      payload: { msg: err.response.status, status: err.response.status }
+    });
+  }
+};
+
+/* export const updateRepair = (formData, history) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+
+    const res = await axios.put("/api/repairs/:id", formData, config);
     dispatch({
       type: ADD_REPAIR,
       payload: res.data
@@ -69,7 +90,7 @@ export const addNewRepair = (
       payload: { msg: err.response.status, status: err.response.status }
     });
   }
-};
+}; */
 
 export const deleteRepair = id => async dispatch => {
   if (window.confirm("Napewno usunąć? "))

@@ -80,6 +80,62 @@ router.post(
   }
 );
 
+router.put(
+  "/:id",
+  [
+    [
+      check("name", "Imię jest wymagane")
+        .not()
+        .isEmpty(),
+      check("email", "Wprowadz email").isEmail(),
+      check("password", "Hasło powinno zawierać więcej niż 6 znaków").isLength({
+        min: 6
+      })
+    ]
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    /* const { name, first_name, last_name, email, password, status } = req.body;
+    user = new User({
+      name,
+      first_name,
+      last_name,
+      email,
+      password,
+      status
+    }); */
+    const newUser = {
+      name: req.body.name,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+
+      email: req.body.email,
+
+      password: req.body.password,
+      status: req.body.status
+    };
+
+    const salt = await bcrypt.genSalt(10);
+    newUser.password = await bcrypt.hash(password, salt);
+    try {
+      work = await User.findOneAndUpdate(
+        { _id: req.params.id },
+        { $set: newUser },
+        { new: true, upsert: true }
+      );
+
+      res.json(work);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
 router.get("/", auth, async (req, res) => {
   try {
     const users = await User.find().sort({ date: -1 });
