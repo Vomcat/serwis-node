@@ -1,11 +1,10 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import moment from "moment";
 
-const Repairs = () => {
+const Stats = () => {
   const [repairs, setRepairs] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [repairsNumer] = useState(5);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,59 +14,33 @@ const Repairs = () => {
     fetchData();
   }, []);
 
-  const lastRepair = currentPage * repairsNumer;
-  const firstRepair = lastRepair - repairsNumer;
-  const currentRepair = repairs.slice(firstRepair, lastRepair);
-
   const [search, setSearch] = useState([]);
-  const onChange = e => setSearch(e.target.value);
+  const onChange = (e) => setSearch(e.target.value);
   const result =
     repairs.find(({ _id }) => _id === search) ||
     repairs.find(({ last_name }) => last_name === search);
+  const table = repairs.map((repair) => (
+    <tr key={repair._id}>
+      <td>{repair._id}</td>
+      <td>{repair.first_name}</td>
+      <td>{repair.last_name}</td>
+      <td>{repair.phone_number}</td>
+      <td>{repair.email}</td>
+      <td>{repair.device}</td>
+      <td>{repair.cost}</td>
+      <td>{moment(repair.date).format("MM")}</td>
+      <td>{repair.status}</td>
 
-  const onDelete = async (e, id) => {};
-  const table = result ? (
-    <tr>
-      <td>{result._id}</td>
-      <td>{result.first_name}</td>
-      <td>{result.last_name}</td>
-      <td>{result.phone_number}</td>
-      <td>{result.email}</td>
-      <td>{result.device}</td>
-      <td>{result.cost}</td>
-      <td>{result.status}</td>
       <td>
-        <Link to={`/editRepair/${result._id}`} className="btn btn-warning">
+        <Link to={`/editRepair/${repair._id}`} className="btn btn-warning">
           Edytuj
         </Link>
       </td>
       <td>
-        <button>Usuń</button>
+        <button className="btn btn-danger">Usuń</button>
       </td>
     </tr>
-  ) : (
-    currentRepair.map(repair => (
-      <tr key={repair._id}>
-        <td>{repair._id}</td>
-        <td>{repair.first_name}</td>
-        <td>{repair.last_name}</td>
-        <td>{repair.phone_number}</td>
-        <td>{repair.email}</td>
-        <td>{repair.device}</td>
-        <td>{repair.cost}</td>
-        <td>{repair.status}</td>
-
-        <td>
-          <Link to={`/editRepair/${repair._id}`} className="btn btn-warning">
-            Edytuj
-          </Link>
-        </td>
-        <td>
-          <button className="btn btn-danger">Usuń</button>
-        </td>
-      </tr>
-    ))
-  );
+  ));
 
   return (
     <Fragment>
@@ -80,7 +53,7 @@ const Repairs = () => {
             placeholder="Search"
             aria-label="Search"
             value={search}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
           />
         </form>
         <table className="table  table-hover ">
@@ -95,6 +68,7 @@ const Repairs = () => {
 
               <th className="hide-sm">Koszt </th>
               <th className="hide-sm">Status </th>
+              <th className="hide-sm">darta </th>
               <th />
               <th />
               <th />
@@ -107,4 +81,4 @@ const Repairs = () => {
   );
 };
 
-export default Repairs;
+export default Stats;

@@ -7,8 +7,8 @@ import {
 } from "../actions/type";
 
 const initialState = {
-  repairs: [],
   repair: null,
+  repairs: [],
   loading: true,
   error: {}
 };

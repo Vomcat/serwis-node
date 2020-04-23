@@ -11,25 +11,13 @@ router.post(
   [
     auth,
     [
-      check("first_name", "Imie jest wymagane")
-        .not()
-        .isEmpty(),
-      check("last_name", "Nazwisko jest wymagane")
-        .not()
-        .isEmpty(),
-      check("device", "Nazwa jest wymagana")
-        .not()
-        .isEmpty(),
-      check("imei", "Imei jest wymagany")
-        .not()
-        .isEmpty(),
-      check("description", "Opis jest wymagany")
-        .not()
-        .isEmpty(),
-      check("cost", "Opis jest wymagany")
-        .not()
-        .isEmpty()
-    ]
+      check("first_name", "Imie jest wymagane").not().isEmpty(),
+      check("last_name", "Nazwisko jest wymagane").not().isEmpty(),
+      check("device", "Nazwa jest wymagana").not().isEmpty(),
+      check("imei", "Imei jest wymagany").not().isEmpty(),
+      check("description", "Opis jest wymagany").not().isEmpty(),
+      check("cost", "Opis jest wymagany").not().isEmpty(),
+    ],
   ],
 
   async (req, res) => {
@@ -49,7 +37,7 @@ router.post(
         imei: req.body.imei,
         description: req.body.description,
         cost: req.body.cost,
-        status: req.body.status
+        status: req.body.status,
       });
 
       const repair = await newRepair.save();
@@ -68,25 +56,13 @@ router.put(
   [
     auth,
     [
-      check("first_name", "Imie jest wymagane")
-        .not()
-        .isEmpty(),
-      check("last_name", "Nazwisko jest wymagane")
-        .not()
-        .isEmpty(),
-      check("device", "Nazwa jest wymagana")
-        .not()
-        .isEmpty(),
-      check("imei", "Imei jest wymagany")
-        .not()
-        .isEmpty(),
-      check("description", "Opis jest wymagany")
-        .not()
-        .isEmpty(),
-      check("cost", "Opis jest wymagany")
-        .not()
-        .isEmpty()
-    ]
+      check("first_name", "Imie jest wymagane").not().isEmpty(),
+      check("last_name", "Nazwisko jest wymagane").not().isEmpty(),
+      check("device", "Nazwa jest wymagana").not().isEmpty(),
+      check("imei", "Imei jest wymagany").not().isEmpty(),
+      check("description", "Opis jest wymagany").not().isEmpty(),
+      check("cost", "Opis jest wymagany").not().isEmpty(),
+    ],
   ],
 
   async (req, res) => {
@@ -105,7 +81,7 @@ router.put(
       imei: req.body.imei,
       description: req.body.description,
       cost: req.body.cost,
-      status: req.body.status
+      status: req.body.status,
     };
 
     try {
@@ -137,7 +113,7 @@ router.get("/", auth, async (req, res) => {
 // get  repairs by id
 router.get("/:id", auth, async (req, res) => {
   try {
-    const repair = await Repairs.findById(req.params.id);
+    const repair = await Repairs.findOne({ _id: req.params.id });
 
     if (!repair) {
       return res.status(404).json({ msg: "Nie am takiej naprawy" });

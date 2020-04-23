@@ -34,7 +34,9 @@ export const getRepair = id => async dispatch => {
       payload: res.data
     });
   } catch (err) {
-    console.log(err);
+    dispatch({
+      type: REPAIR_ERROR
+    });
   }
 };
 

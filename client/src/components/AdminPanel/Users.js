@@ -10,23 +10,26 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
     getAllUsers();
   }, [getAllUsers]);
 
-  console.log("uzytkownicy", users);
-
-  const table = users.map(user => (
+  const table = users.map((user) => (
     <tr key={user._id}>
       <td>{user.name}</td>
       <td>{user.first_name}</td>
       <td>{user.last_name}</td>
       <td>{user.email}</td>
-      <td>{user.status}</td>
+      <td>{user.status ? "Admin" : "Pracownik"}</td>
 
       <td>
-        <Link to={`/editUser/${user._id}`} className='btn btn-warning'>
+        <Link to={`/editUser/${user._id}`} className="btn btn-warning">
           Edytuj
         </Link>
       </td>
       <td>
-        <button onClick={() => deleteUser(user._id)} className='btn btn-danger'>
+        <Link to={`/resteUserPassword/${user._id}`} className="btn btn-warning">
+          Reset Hasła
+        </Link>
+      </td>
+      <td>
+        <button onClick={() => deleteUser(user._id)} className="btn btn-danger">
           Usuń
         </button>
       </td>
@@ -35,18 +38,18 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
 
   return (
     <Fragment>
-      <div className='container'>
+      <div className="container">
         <h2>Użytkownicy</h2>
         {console.log(users)}
 
-        <table className='table  table-hover '>
+        <table className="table  table-hover ">
           <thead>
             <tr>
-              <th className='hide-sm'>Login</th>
-              <th className='hide-sm'>Imie</th>
-              <th className='hide-sm'>Nazwisko</th>
-              <th className='hide-sm'>Email</th>
-              <th className='hide-sm'>Status </th>
+              <th className="hide-sm">Login</th>
+              <th className="hide-sm">Imie</th>
+              <th className="hide-sm">Nazwisko</th>
+              <th className="hide-sm">Email</th>
+              <th className="hide-sm">Status </th>
               <th />
               <th />
             </tr>
@@ -62,15 +65,12 @@ Users.propTypes = {
   getAllUsers: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  user: state.users
+  user: state.users,
 });
 
-export default connect(
-  mapStateToProps,
-  { getAllUsers, deleteUser }
-)(Users);
+export default connect(mapStateToProps, { getAllUsers, deleteUser })(Users);
