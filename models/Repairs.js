@@ -4,45 +4,45 @@ const Schema = mongoose.Schema;
 const RepairsSchema = new mongoose.Schema({
   first_name: {
     type: String,
-    required: true
+    required: true,
   },
   last_name: {
     type: String,
-    required: true
+    required: true,
   },
   phone_number: {
-    type: String
+    type: String,
   },
   email: {
-    type: String
+    type: String,
   },
   device: {
     type: String,
-    required: true
+    required: true,
   },
   code: {
-    type: String
+    type: String,
   },
   imei: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   cost: {
-    type: String,
-    required: true
+    type: Number,
+    required: true,
   },
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   status: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 module.exports = Repairs = mongoose.model("repairs", RepairsSchema);

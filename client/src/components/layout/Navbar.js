@@ -42,6 +42,9 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
               <Link className="dropdown-item" to="/stats">
                 Statystyki
               </Link>
+              <Link className="dropdown-item" to="/chart">
+                Statystyki
+              </Link>
             </Fragment>
           ) : null}
           <div class="dropdown-divider"></div>
