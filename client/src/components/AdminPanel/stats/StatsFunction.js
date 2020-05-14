@@ -4,9 +4,8 @@ import Axios from "axios";
 import moment from "moment";
 import Chart from "./ChartYear";
 
-const Stats = () => {
+const StatsFunction = (props) => {
   const miesiac = [
-    "",
     "Styczeń",
     "Luty",
     "Marzec",
@@ -22,7 +21,7 @@ const Stats = () => {
   ];
 
   const [repairs, setRepairs] = useState([]);
-  const [yearValue, setyearValue] = useState(new Date().getFullYear());
+  const [year, setYear] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,35 +31,42 @@ const Stats = () => {
     fetchData();
   }, []);
 
+  /*  const okres = repairs
+    .filter((repair) => moment(repair.date).format("MM") == 4)
+    .reduce((prev, cur) => {
+      return prev + cur.cost;
+    }, 0); */
+
   const mapDayToMonth = repairs.map((x) => ({
     ...x,
     month: moment(x.date).format("M"),
+    year: moment(x.date).format("YYYY"),
   }));
   const setMonthValue = mapDayToMonth
-    .filter((x) => moment(x.date).format("YYYY") == yearValue)
+    .filter(({ year }) => year === props.year)
     .reduce((acc, cur) => {
       acc[cur.month] = acc[cur.month] + cur.cost || cur.cost;
       return acc;
     }, []);
 
+  console.log("miesiac", setMonthValue);
+  console.log(year);
   const repairsTypeSum = repairs
-    .filter(
-      (x) =>
-        x.status === "Zakończona" && moment(x.date).format("YYYY") == yearValue
-    )
+    .filter(({ status }) => status === "Zakończona")
     .reduce((acc, cur) => {
       acc[cur.status] = acc[cur.status] + cur.cost || cur.cost;
       return acc;
     }, []);
 
+  console.log(repairsTypeSum);
   return (
     <Fragment>
       <label htmlFor="inputEmail4">Status naprawy</label>
       <select
         className="form-control"
         name="status"
-        value={yearValue}
-        onChange={(e) => setyearValue(e.target.value)}
+        value={year}
+        onChange={(e) => setYear(e.target.value)}
         required
       >
         <option value="0">Wybierz rok</option>
@@ -72,4 +78,4 @@ const Stats = () => {
   );
 };
 
-export default Stats;
+export default StatsFunction;

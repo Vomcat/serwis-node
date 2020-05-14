@@ -9,7 +9,7 @@ import Users from "./components/AdminPanel/Users";
 import EditUser from "./components/AdminPanel/EditUser";
 import ResetUserPassword from "./components/AdminPanel/ResetUserPassword";
 import Stats from "./components/AdminPanel/stats/Stats";
-import Chart from "./components/AdminPanel/stats/Chart";
+import Chart from "./components/AdminPanel/stats/ChartYear";
 
 import Repairs from "./components/repairs/Repairs";
 import NewRepair from "./components/repairs/NewRepair";

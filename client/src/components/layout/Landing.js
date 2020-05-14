@@ -9,28 +9,32 @@ const Landing = ({ isAuthenticated }) => {
     return <Redirect to="/repairs" />;
   }
   return (
-    <section className="text-center">
-      <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-          <main role="main" className="inner cover">
-            <h1 className="cover-heading">Serwis komputerowy</h1>
-            <p className="lead">Zaloguj się na swoje konto</p>
-            <p className="lead">
-              <Link to="/login" className="btn btn-lg btn-secondary">
-                Login
-              </Link>
-            </p>
-          </main>
-        </div>
+    <div className="background__image">
+      <div className="landing">
+        <section className="text-center">
+          <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+              <main role="main" className="inner cover">
+                <h1 className="cover-heading">Serwis komputerowy</h1>
+                <p className="lead">Zaloguj się na swoje konto</p>
+                <p className="lead">
+                  <Link to="/login" className="btn btn-lg btn-secondary">
+                    Login
+                  </Link>
+                </p>
+              </main>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
   );
 };
 
 Landing.propTypes = {
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
 };
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
 });
 export default connect(mapStateToProps)(Landing);

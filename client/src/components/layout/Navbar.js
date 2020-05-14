@@ -7,7 +7,7 @@ import { logout } from "../../actions/auth";
 const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
   const admin = { ...user };
   const authLink = (
-    <ul className="nav navbar-nav ml-auto">
+    <ul className="nav ml-auto">
       <li className="nav-item">
         <Link className="nav-link" to="/repairs">
           Naprawy
@@ -69,7 +69,7 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
     </ul>
   );
   return (
-    <nav className="  navbar navbar-expand-md navbar-dark  bg-dark navbar bg-dark">
+    <nav className="navbar sticky-top bg-dark">
       <h2>
         <Link className="nav-link" to="/">
           <i className="navbar-brand" /> Serwis

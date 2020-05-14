@@ -20,7 +20,7 @@ const Repairs = () => {
   const currentRepair = repairs.slice(firstRepair, lastRepair);
 
   const [search, setSearch] = useState([]);
-  const onChange = e => setSearch(e.target.value);
+  const onChange = (e) => setSearch(e.target.value);
   const result =
     repairs.find(({ _id }) => _id === search) ||
     repairs.find(({ last_name }) => last_name === search);
@@ -46,7 +46,7 @@ const Repairs = () => {
       </td>
     </tr>
   ) : (
-    currentRepair.map(repair => (
+    currentRepair.map((repair) => (
       <tr key={repair._id}>
         <td>{repair._id}</td>
         <td>{repair.first_name}</td>
@@ -72,7 +72,7 @@ const Repairs = () => {
   return (
     <Fragment>
       <div className="container">
-        <h2>Naprawy</h2>
+        <h2 className="reapirs--heading">Naprawy</h2>
         <form className="form-inline my-2 my-lg-0">
           <input
             className="form-control mr-sm-2"
@@ -80,7 +80,7 @@ const Repairs = () => {
             placeholder="Search"
             aria-label="Search"
             value={search}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
           />
         </form>
         <table className="table  table-hover ">
