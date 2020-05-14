@@ -23,6 +23,8 @@ const Stats = () => {
 
   const [repairs, setRepairs] = useState([]);
   const [yearValue, setyearValue] = useState(new Date().getFullYear());
+  const [reapairsCount, setRepairCount] = useState([]);
+  const [repairsWarranty, setrepairsWarranty] = useState([0]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,31 +45,44 @@ const Stats = () => {
       return acc;
     }, []);
 
-  const repairsTypeSum = repairs
+  const repairsSum = repairs
     .filter(
       (x) =>
-        x.status === "Zakończona" && moment(x.date).format("YYYY") == yearValue
+        x.status == "Zakończona" && moment(x.date).format("YYYY") == yearValue
     )
     .reduce((acc, cur) => {
-      acc[cur.status] = acc[cur.status] + cur.cost || cur.cost;
-      return acc;
-    }, []);
+      return acc + +cur.cost;
+    }, 0);
+
+  const repairsCount = repairs
+    .filter(
+      (x) =>
+        x.status == "Zakończona" && moment(x.date).format("YYYY") == yearValue
+    )
+    .reduce((acc, cur) => {
+      return acc + +cur.cost;
+    }, 0);
 
   return (
     <Fragment>
-      <label htmlFor="inputEmail4">Status naprawy</label>
-      <select
-        className="form-control"
-        name="status"
-        value={yearValue}
-        onChange={(e) => setyearValue(e.target.value)}
-        required
-      >
-        <option value="0">Wybierz rok</option>
-        <option value="2019">2019</option>
-        <option value="2020"> 2020</option>
-      </select>
-      <Chart value={setMonthValue} mie={miesiac} />
+      <div className="container">
+        <label htmlFor="inputEmail4">Wybierz rok</label>
+        <select
+          className="form-control"
+          name="status"
+          value={yearValue}
+          onChange={(e) => setyearValue(e.target.value)}
+          required
+        >
+          <option value="0">Wybierz rok</option>
+          <option value="2019">2019</option>
+          <option value="2020"> 2020</option>
+        </select>
+        <h2>Statystyki za rok {yearValue}</h2>
+        <h3>Łączna suma przychodu: {repairsSum}zł</h3>
+        <h3>Łączna suma przychodu: {repairsSum}zł</h3>
+        <Chart value={setMonthValue} mie={miesiac} />
+      </div>
     </Fragment>
   );
 };

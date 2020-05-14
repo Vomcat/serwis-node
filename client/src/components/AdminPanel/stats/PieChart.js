@@ -10,28 +10,25 @@ import { Bar, Line, Pie } from "react-chartjs-2";
   Tooltip,
 } from "recharts"; */
 
-const renderLineChart = (props) => {
+const renderPieChart = (props) => {
   const data = {
     labels: props.mie,
+    labels: ["Gwarancja", "Blue", "Yellow"],
     datasets: [
       {
-        label: "Suma przychodu",
-        backgroundColor: "rgba(0, 255, 255,0.2)",
-        borderColor: "rgba(0, 255, 255,1)",
-        borderWidth: 1,
-        hoverBackgroundColor: "rgba(22, 196, 196,0.4)",
-        hoverBorderColor: "rgba(22, 196, 196,1)",
-
-        data: props.value,
+        data: [300, 50, 100],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       },
     ],
   };
   return (
     <div>
+      <h2>Line Example</h2>
       <Bar
         data={data}
         width={70}
-        height={200}
+        height={100}
         options={{
           maintainAspectRatio: false,
         }}
@@ -39,4 +36,4 @@ const renderLineChart = (props) => {
     </div>
   );
 };
-export default renderLineChart;
+export default renderPieChart;

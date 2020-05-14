@@ -18,9 +18,9 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
           Nowa naprawa
         </Link>
       </li>
-      <li class="nav-item dropdown">
+      <li className="nav-item dropdown">
         <a
-          class="nav-link dropdown-toggle"
+          className="nav-link dropdown-toggle"
           data-toggle="dropdown"
           href="#"
           role="button"
@@ -29,7 +29,7 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
         >
           Konto użytkownika
         </a>
-        <div class="dropdown-menu">
+        <div className="dropdown-menu">
           {admin.status ? (
             <Fragment>
               {" "}
@@ -51,7 +51,7 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
           <Link className="dropdown-item" to="/users">
             Ustawienia
           </Link>
-          <a class="dropdown-item" onClick={logout} href="#!" href="#">
+          <a className="dropdown-item" onClick={logout} href="#!" href="#">
             Wyloguj
           </a>
         </div>
