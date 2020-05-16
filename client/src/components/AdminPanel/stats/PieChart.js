@@ -12,11 +12,10 @@ import { Bar, Line, Pie } from "react-chartjs-2";
 
 const renderPieChart = (props) => {
   const data = {
-    labels: props.mie,
-    labels: ["Gwarancja", "Blue", "Yellow"],
+    labels: ["Red", "Blue", "Yellow"],
     datasets: [
       {
-        data: [300, 50, 100],
+        data: props.value,
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       },
@@ -24,15 +23,7 @@ const renderPieChart = (props) => {
   };
   return (
     <div>
-      <h2>Line Example</h2>
-      <Bar
-        data={data}
-        width={70}
-        height={100}
-        options={{
-          maintainAspectRatio: false,
-        }}
-      />
+      <Pie data={data} />
     </div>
   );
 };

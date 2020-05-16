@@ -69,7 +69,7 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
     </ul>
   );
   return (
-    <nav className="navbar sticky-top bg-dark">
+    <nav className="navbar bg-dark ">
       <h2>
         <Link className="nav-link" to="/">
           <i className="navbar-brand" /> Serwis

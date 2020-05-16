@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import moment from "moment";
 import Chart from "./ChartYear";
+import PieChart from "./PieChart";
 
 const Stats = () => {
   const miesiac = [
@@ -23,8 +24,6 @@ const Stats = () => {
 
   const [repairs, setRepairs] = useState([]);
   const [yearValue, setyearValue] = useState(new Date().getFullYear());
-  const [reapairsCount, setRepairCount] = useState([]);
-  const [repairsWarranty, setrepairsWarranty] = useState([0]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +32,25 @@ const Stats = () => {
     };
     fetchData();
   }, []);
+
+  const allRepairsNumer = repairs.filter((x) => {
+    return moment(x.date).format("YYYY") == yearValue;
+  }).length;
+  const endedRepairs = repairs.filter((x) => {
+    return (
+      x.status == "Zakończona" && moment(x.date).format("YYYY") == yearValue
+    );
+  }).length;
+  const warrantyRepairs = repairs.filter((x) => {
+    return (
+      x.status == "Gwarancja" && moment(x.date).format("YYYY") == yearValue
+    );
+  }).length;
+  const returnedRepairs = repairs.filter((x) => {
+    return (
+      x.status == "Reklamacja" && moment(x.date).format("YYYY") == yearValue
+    );
+  }).length;
 
   const mapDayToMonth = repairs.map((x) => ({
     ...x,
@@ -79,9 +97,14 @@ const Stats = () => {
           <option value="2020"> 2020</option>
         </select>
         <h2>Statystyki za rok {yearValue}</h2>
-        <h3>Łączna suma przychodu: {repairsSum}zł</h3>
-        <h3>Łączna suma przychodu: {repairsSum}zł</h3>
+        <h3>Suma przychodu: {repairsSum}zł</h3>
+        <h3>Łączna suma przychodu: {endedRepairs}zł</h3>
         <Chart value={setMonthValue} mie={miesiac} />
+        <h3>Ilość wszystkich napraw: {allRepairsNumer}</h3>
+        <h3>Ilość zakończonych napraw: {endedRepairs}</h3>
+        <h3>Ilość napraw gwarancyjnych: {warrantyRepairs}</h3>
+        <h3>Ilość zwrotów: {returnedRepairs}</h3>
+        <PieChart value={[endedRepairs, warrantyRepairs, returnedRepairs]} />
       </div>
     </Fragment>
   );
