@@ -1,18 +1,8 @@
 import React, { PureComponent } from "react";
-
-import { Bar, Line, Pie } from "react-chartjs-2";
-/* import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts"; */
-
+import { Pie } from "react-chartjs-2";
 const renderPieChart = (props) => {
   const data = {
-    labels: ["Red", "Blue", "Yellow"],
+    labels: props.label,
     datasets: [
       {
         data: props.value,

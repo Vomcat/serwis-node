@@ -61,50 +61,59 @@ const EditUser = ({ match, history }) => {
   };
   return (
     <Fragment>
-      <div className="text-center">
-        <form className="form-signin" onSubmit={(e) => onSubmit(e)}>
-          <h1 className="h3 mb-3 font-weight-normal">
-            Edytuj dane użytkownika
-          </h1>
+      <div className="container container--flex ">
+        <div className="form-body form-login">
+          <div className="text-center">
+            <form className="form-signin" onSubmit={(e) => onSubmit(e)}>
+              <div className="form-items-wrapper">
+                <h1 className="form-heading">Edytuj dane pracownika</h1>
+              </div>
+              <div className="form-input-wrapper">
+                <input
+                  type="text"
+                  name="name"
+                  className="form-control"
+                  placeholder=" Nazwa użytkownika"
+                  value={name}
+                  onChange={(e) => onChange(e)}
+                  required
+                />
+              </div>
+              <div className="form-input-wrapper">
+                <input
+                  type="text"
+                  name="first_name"
+                  className="form-control"
+                  placeholder="Imię"
+                  value={first_name}
+                  onChange={(e) => onChange(e)}
+                  required
+                />
+              </div>
+              <div className="form-input-wrapper">
+                <input
+                  type="text"
+                  name="last_name"
+                  className="form-control"
+                  placeholder="Nazwisko"
+                  value={last_name}
+                  onChange={(e) => onChange(e)}
+                  required
+                />
+              </div>
+              <div className="form-input-wrapper">
+                <input
+                  type="email"
+                  name="email"
+                  className="form-control"
+                  placeholder=" Email"
+                  value={email}
+                  onChange={(e) => onChange(e)}
+                  required
+                />
+              </div>
 
-          <input
-            type="text"
-            name="name"
-            className="form-control"
-            placeholder=" Nazwa użytkownika"
-            value={name}
-            onChange={(e) => onChange(e)}
-            required
-          />
-          <input
-            type="text"
-            name="first_name"
-            className="form-control"
-            placeholder="Imię"
-            value={first_name}
-            onChange={(e) => onChange(e)}
-            required
-          />
-          <input
-            type="text"
-            name="last_name"
-            className="form-control"
-            placeholder="Nazwisko"
-            value={last_name}
-            onChange={(e) => onChange(e)}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            placeholder=" Email"
-            value={email}
-            onChange={(e) => onChange(e)}
-            required
-          />
-
-          {/*      <input
+              {/*      <input
             type="password"
             name="password"
             className="form-control"
@@ -122,20 +131,24 @@ const EditUser = ({ match, history }) => {
             onChange={(e) => onChange(e)}
             required
           />  */}
-          <div className="form-group">
-            <select name="status" value={status} onChange={(e) => onChange(e)}>
-              <option value="0">Rodzaj użytkownika</option>
-              <option value="false">Admin</option>
-              <option value="true"> User</option>
-            </select>
+              <div className="form-input-wrapper">
+                <select
+                  name="status"
+                  value={status}
+                  onChange={(e) => onChange(e)}
+                  className="select-css"
+                >
+                  <option value="0">Rodzaj użytkownika</option>
+                  <option value="false">Admin</option>
+                  <option value="true"> User</option>
+                </select>
+              </div>
+              <div className="form-items-wrapper">
+                <input type="submit" className="btn btn--green" value="Dodaj" />
+              </div>
+            </form>
           </div>
-
-          <input
-            type="submit"
-            className='"btn btn-lg btn-btn btn-lg btn-secondary btn-block'
-            value="Dodaj"
-          />
-        </form>
+        </div>
       </div>
     </Fragment>
   );

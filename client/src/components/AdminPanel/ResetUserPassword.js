@@ -40,36 +40,45 @@ const EditUserPassword = ({ match, history }) => {
   };
   return (
     <Fragment>
-      <div className="text-center">
-        <form className="form-signin" onSubmit={(e) => onSubmit(e)}>
-          <h1 className="h3 mb-3 font-weight-normal">
-            Edytuj dane użytkownika
-          </h1>
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            placeholder="Hasło"
-            value={password}
-            onChange={(e) => onChange(e)}
-            required
-          />
-          <input
-            type="password"
-            name="password2"
-            className="form-control"
-            placeholder="Powtórz hasło"
-            value={password2}
-            onChange={(e) => onChange(e)}
-            required
-          />
-
-          <input
-            type="submit"
-            className='"btn btn-lg btn-btn btn-lg btn-secondary btn-block'
-            value="Dodaj"
-          />
-        </form>
+      <div className="container container--flex ">
+        <div className="form-body form-login">
+          <div className="text-center">
+            <form className="form-signin" onSubmit={(e) => onSubmit(e)}>
+              <div className="form-items-wrapper">
+                <h1 className="form-heading">Zmień hasło</h1>
+              </div>
+              <div className="form-input-wrapper">
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  placeholder="Hasło"
+                  value={password}
+                  onChange={(e) => onChange(e)}
+                  required
+                />
+              </div>
+              <div className="form-input-wrapper">
+                <input
+                  type="password"
+                  name="password2"
+                  className="form-control"
+                  placeholder="Powtórz hasło"
+                  value={password2}
+                  onChange={(e) => onChange(e)}
+                  required
+                />
+              </div>
+              <div className="form-items-wrapper">
+                <input
+                  type="submit"
+                  className="btn btn--green"
+                  value="Zmień hasło"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </Fragment>
   );

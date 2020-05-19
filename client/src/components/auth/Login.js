@@ -28,35 +28,43 @@ const Login = ({ login, isAuthenticated }) => {
     <Fragment>
       <div className="background__image">
         <div className="landing">
-          <div className="text-center">
-            <form className="form-signin" onSubmit={(e) => onSubmit(e)}>
-              <h1 className="h3 mb-3 font-weight-normal">Zaloguj się</h1>
-
-              <input
-                type="email"
-                name="email"
-                className="form-control"
-                placeholder=" Nazwa użytkownika"
-                value={email}
-                onChange={(e) => onChange(e)}
-                required
-              />
-
-              <input
-                type="password"
-                name="password"
-                className="form-control"
-                placeholder="Hasło"
-                value={password}
-                onChange={(e) => onChange(e)}
-                required
-              />
-              <input
-                type="submit"
-                className='"btn btn-lg btn-btn btn-lg btn-secondary btn-block'
-                value="Login"
-              />
-            </form>
+          <div className="container container--flex ">
+            <div className="form-body form-login">
+              <form className="form-signin" onSubmit={(e) => onSubmit(e)}>
+                <div className="form-items-wrapper">
+                  <h1 className="form-heading">Zaloguj się</h1>
+                </div>
+                <div className="form-input-wrapper">
+                  <input
+                    type="email"
+                    name="email"
+                    className="form-control"
+                    placeholder=" Nazwa użytkownika"
+                    value={email}
+                    onChange={(e) => onChange(e)}
+                    required
+                  />
+                </div>
+                <div className="form-input-wrapper">
+                  <input
+                    type="password"
+                    name="password"
+                    className="form-control"
+                    placeholder="Hasło"
+                    value={password}
+                    onChange={(e) => onChange(e)}
+                    required
+                  />
+                </div>
+                <div className="form-items-wrapper">
+                  <input
+                    type="submit"
+                    className="btn btn--green"
+                    value="Login"
+                  />
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>

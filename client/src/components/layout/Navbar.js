@@ -6,79 +6,76 @@ import { logout } from "../../actions/auth";
 
 const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
   const admin = { ...user };
+  const [dropMenu, setDropMenu] = useState(false);
+
   const authLink = (
-    <ul className="nav ml-auto">
-      <li className="nav-item">
-        <Link className="nav-link" to="/repairs">
-          Naprawy
-        </Link>
+    <ul>
+      <li>
+        <Link to="/repairs">Naprawy</Link>
       </li>
-      <li className="nav-item">
-        <Link className="nav-link" to="/newRepair">
-          Nowa naprawa
-        </Link>
+      <li>
+        <Link to="/newRepair">Nowa naprawa</Link>
       </li>
-      <li className="nav-item dropdown">
-        <a
-          className="nav-link dropdown-toggle"
-          data-toggle="dropdown"
-          href="#"
-          role="button"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Konto użytkownika
-        </a>
-        <div className="dropdown-menu">
-          {admin.status ? (
-            <Fragment>
-              {" "}
+      <li className="nav-item dropdown" onClick={() => setDropMenu(!dropMenu)}>
+        <a aria-haspopup="true">{(admin.first_name, admin.last_name)}</a>
+        {dropMenu && (
+          <ul className="dropdown">
+            {admin.status ? (
+              <Fragment>
+                {" "}
+                <li>
+                  <Link className="dropdown-item" to="/users">
+                    Użytkownicy
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/new">
+                    Dodaj użytkownika
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/stats">
+                    Statystyki
+                  </Link>
+                </li>
+              </Fragment>
+            ) : null}
+            <li>
               <Link className="dropdown-item" to="/users">
-                Użytkownicy
+                Ustawienia
               </Link>
-              <Link className="dropdown-item" to="/new">
-                Dodaj użytkownika
-              </Link>
-              <Link className="dropdown-item" to="/stats">
-                Statystyki
-              </Link>
-              <Link className="dropdown-item" to="/chart">
-                Statystyki
-              </Link>
-            </Fragment>
-          ) : null}
-          <div class="dropdown-divider"></div>
-          <Link className="dropdown-item" to="/users">
-            Ustawienia
-          </Link>
-          <a className="dropdown-item" onClick={logout} href="#!" href="#">
-            Wyloguj
-          </a>
-        </div>
+            </li>
+            <li>
+              <a className="dropdown-item" onClick={logout} href="#!" href="#">
+                Wyloguj
+              </a>
+            </li>
+          </ul>
+        )}
       </li>
     </ul>
   );
 
   const guestLinks = (
-    <ul className="nav navbar-nav ml-auto">
-      <li className="nav-item">
-        <Link className="nav-link" to="/login">
-          Login
-        </Link>
+    <ul>
+      <li>
+        <Link to="/login">Login</Link>
       </li>
     </ul>
   );
   return (
-    <nav className="navbar bg-dark ">
-      <h2>
-        <Link className="nav-link" to="/">
-          <i className="navbar-brand" /> Serwis
-        </Link>
-      </h2>
-      <Fragment>
-        {" "}
-        {isAuthenticated ? authLink : guestLinks} {}
-      </Fragment>
+    <nav className="navbar">
+      <div className="navbar-con">
+        <h2>
+          <Link to="/">
+            <i className="navbar-brand" /> Serwis
+          </Link>
+        </h2>
+        <Fragment>
+          {" "}
+          {isAuthenticated ? authLink : guestLinks} {}
+        </Fragment>
+      </div>
     </nav>
   );
 };

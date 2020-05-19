@@ -12,24 +12,35 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
 
   const table = users.map((user) => (
     <tr key={user._id}>
-      <td>{user.name}</td>
-      <td>{user.first_name}</td>
-      <td>{user.last_name}</td>
-      <td>{user.email}</td>
-      <td>{user.status ? "Admin" : "Pracownik"}</td>
+      <td scope="row" data-label="Imię">
+        {user.name}
+      </td>
+      <td data-label="Imię">{user.first_name}</td>
+      <td data-label="Imię">{user.last_name}</td>
+      <td data-label="Imię">{user.email}</td>
+      <td data-label="Imię">{user.status ? "Admin" : "Pracownik"}</td>
 
       <td>
-        <Link to={`/editUser/${user._id}`} className="btn btn-warning">
+        <Link
+          to={`/editUser/${user._id}`}
+          className="btn btn--yellow btn--small"
+        >
           Edytuj
         </Link>
       </td>
       <td>
-        <Link to={`/resteUserPassword/${user._id}`} className="btn btn-warning">
+        <Link
+          to={`/resteUserPassword/${user._id}`}
+          className="btn btn--yellow btn--small"
+        >
           Reset Hasła
         </Link>
       </td>
       <td>
-        <button onClick={() => deleteUser(user._id)} className="btn btn-danger">
+        <button
+          onClick={() => deleteUser(user._id)}
+          className="btn btn--red btn--small"
+        >
           Usuń
         </button>
       </td>
@@ -39,23 +50,25 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
   return (
     <Fragment>
       <div className="container">
-        <h2>Użytkownicy</h2>
-        {console.log(users)}
+        <div className="form-body ">
+          <h2>Użytkownicy</h2>
 
-        <table className="table  table-hover ">
-          <thead>
-            <tr>
-              <th className="hide-sm">Login</th>
-              <th className="hide-sm">Imie</th>
-              <th className="hide-sm">Nazwisko</th>
-              <th className="hide-sm">Email</th>
-              <th className="hide-sm">Status </th>
-              <th />
-              <th />
-            </tr>
-          </thead>
-          <tbody>{table}</tbody>
-        </table>
+          <table>
+            <thead>
+              <tr className="tabel-heading">
+                <th scope="col">Login</th>
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status </th>
+                <th />
+                <th />
+                <th />
+              </tr>
+            </thead>
+            <tbody>{table}</tbody>
+          </table>
+        </div>
       </div>
     </Fragment>
   );

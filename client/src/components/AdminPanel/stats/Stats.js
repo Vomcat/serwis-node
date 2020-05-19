@@ -84,27 +84,48 @@ const Stats = () => {
   return (
     <Fragment>
       <div className="container">
-        <label htmlFor="inputEmail4">Wybierz rok</label>
-        <select
-          className="form-control"
-          name="status"
-          value={yearValue}
-          onChange={(e) => setyearValue(e.target.value)}
-          required
-        >
-          <option value="0">Wybierz rok</option>
-          <option value="2019">2019</option>
-          <option value="2020"> 2020</option>
-        </select>
-        <h2>Statystyki za rok {yearValue}</h2>
-        <h3>Suma przychodu: {repairsSum}zł</h3>
-        <h3>Łączna suma przychodu: {endedRepairs}zł</h3>
-        <Chart value={setMonthValue} mie={miesiac} />
-        <h3>Ilość wszystkich napraw: {allRepairsNumer}</h3>
-        <h3>Ilość zakończonych napraw: {endedRepairs}</h3>
-        <h3>Ilość napraw gwarancyjnych: {warrantyRepairs}</h3>
-        <h3>Ilość zwrotów: {returnedRepairs}</h3>
-        <PieChart value={[endedRepairs, warrantyRepairs, returnedRepairs]} />
+        <div className="form-body">
+          <div className="form-items-wrapper">
+            <label className="label">Wybierz rok</label>
+          </div>
+          <div className="form-input-wrapper">
+            <select
+              className="select-css"
+              name="status"
+              value={yearValue}
+              onChange={(e) => setyearValue(e.target.value)}
+              required
+            >
+              <option value="0">Wybierz rok</option>
+              <option value="2019">2019</option>
+              <option value="2020"> 2020</option>
+            </select>
+          </div>
+          <div className="form-items-wrapper">
+            <h2>Statystyki za rok {yearValue}</h2>
+          </div>
+          <div className="stats-row">
+            <h3>Suma przychodu: {repairsSum}zł</h3>
+          </div>
+          <div className="stats-row">
+            <h3>Ilość zakończonych napraw: {endedRepairs}</h3>
+          </div>
+          <Chart value={setMonthValue} mie={miesiac} />
+
+          <div className="stats-row">
+            <h3>Ilość wszystkich napraw: {allRepairsNumer}</h3>
+          </div>
+          <div className="stats-pie">
+            <PieChart
+              label={[
+                "Ilość zakończonych napraw: " + endedRepairs,
+                "Ilość napraw gwarancyjnych: " + warrantyRepairs,
+                "Ilość zwrotów: " + returnedRepairs,
+              ]}
+              value={[endedRepairs, warrantyRepairs, returnedRepairs]}
+            />
+          </div>
+        </div>
       </div>
     </Fragment>
   );

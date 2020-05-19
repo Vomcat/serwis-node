@@ -1,14 +1,6 @@
 import React, { PureComponent } from "react";
 
-import { Bar, Line, Pie } from "react-chartjs-2";
-/* import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts"; */
+import { Bar } from "react-chartjs-2";
 
 const renderLineChart = (props) => {
   const data = {
