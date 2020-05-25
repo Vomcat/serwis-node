@@ -82,6 +82,7 @@ router.put(
       description: req.body.description,
       cost: req.body.cost,
       status: req.body.status,
+      dateEnd: Date.now(),
     };
 
     try {
@@ -92,7 +93,9 @@ router.put(
       );
       res.json(repair);
     } catch (err) {
-      console.error(err.message);
+      if (err.kind === "ObjectId") {
+        return res.status(404).json({ msg: "Nie am takiej naprawy" });
+      }
 
       res.status(500).send("ServerError");
     }
@@ -110,18 +113,12 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// get  repairs by id
 router.get("/:id", auth, async (req, res) => {
   try {
     const repair = await Repairs.findOne({ _id: req.params.id });
 
-    if (!repair) {
-      return res.status(404).json({ msg: "Nie am takiej naprawy" });
-    }
-
     res.json(repair);
   } catch (err) {
-    console.error(err.message);
     if (err.kind === "ObjectId") {
       return res.status(404).json({ msg: "Nie am takiej naprawy" });
     }

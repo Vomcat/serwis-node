@@ -1,78 +1,83 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getAllRepairs } from "../../actions/repairs";
+import { deleteRepair } from "../../actions/repairs";
+const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
+  useEffect(() => {
+    getAllRepairs();
+  }, [getAllRepairs]);
 
-const Repairs = () => {
-  const [repairs, setRepairs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [repairsNumer] = useState(5);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await Axios.get("/api/repairs/");
-      setRepairs(res.data);
-    };
-    fetchData();
-  }, []);
+  const [search, setSearch] = useState([]);
 
   const lastRepair = currentPage * repairsNumer;
   const firstRepair = lastRepair - repairsNumer;
   const currentRepair = repairs.slice(firstRepair, lastRepair);
 
-  const [search, setSearch] = useState([]);
   const onChange = (e) => setSearch(e.target.value);
-  const result =
-    repairs.find(({ _id }) => _id === search) ||
-    repairs.find(({ last_name }) => last_name === search);
-
+  const result = repairs.filter((x) => x.phone_number == search);
+  console.log(result);
   const onDelete = async (e, id) => {};
-  const table = result ? (
-    <tr>
-      <td scope="row" data-label="Imię">
-        {result.first_name}
-      </td>
-      <td data-label="Nazwisko">{result.last_name}</td>
-      <td data-label="Numer tel.">{result.phone_number}</td>
-      <td data-label="Email">{result.email}</td>
-      <td data-label="Urządzenie">{result.device}</td>
-      <td data-label="koszt">{result.cost}</td>
-      <td data-label="Status">{result.status}</td>
-      <td>
-        <Link to={`/editRepair/${result._id}`} className="btn btn--yellow">
-          Edytuj
-        </Link>
-      </td>
-      <td>
-        <button className="btn btn--red btn--small">Usuń</button>
-      </td>
-    </tr>
-  ) : (
-    currentRepair.map((repair) => (
-      <tr key={repair._id}>
-        <td scope="row" data-label="Imię">
-          {repair.first_name}
-        </td>
-        <td data-label="Nazwisko">{repair.last_name}</td>
-        <td data-label="Numer tel.">{repair.phone_number}</td>
-        <td data-label="Email">{repair.email}</td>
-        <td data-label="Urządzenie">{repair.device}</td>
-        <td data-label="Koszt">{repair.cost}</td>
-        <td data-label="Status">{repair.status}</td>
+  const table =
+    result != ""
+      ? result.map((repair) => (
+          <tr>
+            <td scope="row" data-label="Imię">
+              {repair.first_name}
+            </td>
+            <td data-label="Nazwisko">{repair.last_name}</td>
+            <td data-label="Numer tel.">{repair.phone_number}</td>
+            <td data-label="Email">{repair.email}</td>
+            <td data-label="Urządzenie">{repair.device}</td>
+            <td data-label="koszt">{repair.cost}</td>
+            <td data-label="Status">{repair.status}</td>
+            <td>
+              <Link
+                to={`/editRepair/${repair._id}`}
+                className="btn btn--yellow btn--small"
+              >
+                Edytuj
+              </Link>
+            </td>
+            <td>
+              <button className="btn btn--red btn--small">Usuń</button>
+            </td>
+          </tr>
+        ))
+      : repairs.map((repair) => (
+          <tr key={repair._id}>
+            <td scope="row" data-label="Imię">
+              {repair.first_name}
+            </td>
+            <td data-label="Nazwisko">{repair.last_name}</td>
+            <td data-label="Numer tel.">{repair.phone_number}</td>
+            <td data-label="Email">{repair.email}</td>
+            <td data-label="Urządzenie">{repair.device}</td>
+            <td data-label="Koszt">{repair.cost}</td>
+            <td data-label="Status">{repair.status}</td>
 
-        <td>
-          <Link
-            to={`/editRepair/${repair._id}`}
-            className="btn btn--yellow btn--small"
-          >
-            Edytuj
-          </Link>
-        </td>
-        <td>
-          <button className="btn btn--red btn--small">Usuń</button>
-        </td>
-      </tr>
-    ))
-  );
+            <td>
+              <Link
+                to={`/editRepair/${repair._id}`}
+                className="btn btn--yellow btn--small"
+              >
+                Edytuj
+              </Link>
+            </td>
+            <td>
+              <button
+                onClick={() => deleteRepair(repair._id)}
+                className="btn btn--red btn--small"
+              >
+                Usuń
+              </button>
+            </td>
+          </tr>
+        ));
 
   return (
     <Fragment>
@@ -116,4 +121,21 @@ const Repairs = () => {
   );
 };
 
-export default Repairs;
+Repairs.propTypes = {
+  auth: PropTypes.object.isRequired,
+  getAllRepairs: PropTypes.func.isRequired,
+  getRepair: PropTypes.func.isRequired,
+  deleteRepair: PropTypes.func.isRequired,
+
+  repair: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  repair: state.repairs,
+});
+
+export default connect(mapStateToProps, {
+  getAllRepairs,
+  deleteRepair,
+})(Repairs);

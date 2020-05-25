@@ -35,7 +35,11 @@ const RepairsSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  date: {
+  dateStart: {
+    type: Date,
+    default: new Date(),
+  },
+  dateEnd: {
     type: Date,
     default: new Date(),
   },

@@ -14,6 +14,7 @@ const EditRepair = ({ match, history }) => {
     imei: "",
     description: "",
     cost: "",
+    dateEnd: "",
   });
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const EditRepair = ({ match, history }) => {
     description,
     cost,
     status,
+    dateEnd,
   } = formData;
   const onChange = (e) =>
     SetData({ ...formData, [e.target.name]: e.target.value });
@@ -163,6 +165,7 @@ const EditRepair = ({
       description,
       cost,
       status,
+      dateEnd,
     };
     try {
       const config = {

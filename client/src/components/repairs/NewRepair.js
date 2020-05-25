@@ -293,11 +293,9 @@ const NewRepair = ({ addNewRepair, history }) => {
 
 NewRepair.propTypes = {
   addNewRepair: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
   repair: state.repair,
 });
 

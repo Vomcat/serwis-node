@@ -22,7 +22,7 @@ router.post(
   "/",
   [
     check("email", "Wprowadz email").isEmail(),
-    check("password", "haslo jest wymagane").exists()
+    check("password", "haslo jest wymagane").exists(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -34,7 +34,7 @@ router.post(
 
     try {
       let user = await User.findOne({
-        email
+        email,
       });
       //Czy istnieje
       if (!user) {
@@ -51,14 +51,14 @@ router.post(
 
       const payload = {
         user: {
-          id: user.id
-        }
+          id: user.id,
+        },
       };
 
       jwt.sign(
         payload,
         config.get("jwtSecret"),
-        { expiresIn: 36000 },
+        { expiresIn: 30 },
         (err, token) => {
           if (err) throw err;
           res.json({ token });

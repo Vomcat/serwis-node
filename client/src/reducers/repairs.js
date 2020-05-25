@@ -3,17 +3,16 @@ import {
   GET_REPAIR,
   GET_REPAIRS,
   DELETE_REPAIR,
-  REPAIR_ERROR
+  REPAIR_ERROR,
 } from "../actions/type";
 
 const initialState = {
   repair: null,
   repairs: [],
-  loading: true,
-  error: {}
+  error: {},
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -21,32 +20,27 @@ export default function(state = initialState, action) {
       return {
         ...state,
         repair: [...state.repairs, payload],
-        loading: false
       };
 
     case GET_REPAIR:
       return {
         ...state,
         repair: payload,
-        loading: false
       };
     case GET_REPAIRS:
       return {
         ...state,
         repairs: payload,
-        loading: false
       };
     case DELETE_REPAIR:
       return {
         ...state,
-        repairs: state.repairs.filter(repair => repair._id !== payload),
-        loading: false
+        repairs: state.repairs.filter((repair) => repair._id !== payload),
       };
     case REPAIR_ERROR:
       return {
         ...state,
         error: payload,
-        loading: false
       };
     default:
       return state;
