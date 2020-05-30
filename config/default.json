@@ -1,4 +1,3 @@
 {
-  "mongoURI": "mongodb+srv://Serwis:haslo1234@licencjat-dtrv0.mongodb.net/test?retryWrites=true&w=majority",
   "jwtSecret": "Serecik"
 }

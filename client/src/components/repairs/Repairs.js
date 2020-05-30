@@ -10,18 +10,11 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
     getAllRepairs();
   }, [getAllRepairs]);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [repairsNumer] = useState(5);
   const [search, setSearch] = useState([]);
-
-  const lastRepair = currentPage * repairsNumer;
-  const firstRepair = lastRepair - repairsNumer;
-  const currentRepair = repairs.slice(firstRepair, lastRepair);
 
   const onChange = (e) => setSearch(e.target.value);
   const result = repairs.filter((x) => x.phone_number == search);
-  console.log(result);
-  const onDelete = async (e, id) => {};
+
   const table =
     result != ""
       ? result.map((repair) => (
@@ -44,7 +37,12 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
               </Link>
             </td>
             <td>
-              <button className="btn btn--red btn--small">Usuń</button>
+              <button
+                onClick={() => deleteRepair(repair._id)}
+                className="btn btn--red btn--small"
+              >
+                Usuń
+              </button>
             </td>
           </tr>
         ))

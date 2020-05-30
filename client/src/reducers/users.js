@@ -4,12 +4,15 @@ import {
   GET_USER,
   DELETE_USER,
   USER_ERROR,
+  EDIT_USER,
+  EDIT_USER_PASSWORD,
 } from "../actions/type";
 
 const initialState = {
   users: [],
   user: null,
   error: {},
+  loading: true,
 };
 
 export default function (state = initialState, action) {
@@ -17,6 +20,8 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case ADD_USER:
+    case EDIT_USER:
+    case EDIT_USER_PASSWORD:
       return {
         ...state,
         user: [...state.users, payload],
@@ -30,6 +35,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         user: payload,
+        loading: false,
       };
     case DELETE_USER:
       return {

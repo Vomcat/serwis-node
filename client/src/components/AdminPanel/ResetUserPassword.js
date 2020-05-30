@@ -1,41 +1,33 @@
-import React, { Fragment, useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, Fragment, useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import { setAlert } from "../../actions/alert";
+import { editUserPassword, getUser } from "../../actions/users";
+import PropTypes from "prop-types";
 
-const EditUserPassword = ({ match, history }) => {
-  const [formData, setData] = useState({
+const ResetUserPassword = ({
+  user: { user, loading },
+  setAlert,
+  editUserPassword,
+  getUser,
+  history,
+  match,
+}) => {
+  const [formData, setFormData] = useState({
     password: "",
     password2: "",
   });
 
-  const { password, password2 } = formData;
+  const { password, password2, status } = formData;
 
   const onChange = (e) =>
-    setData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    const upUser = {
-      password,
-    };
     if (password !== password2) {
-      console.log("dupa");
+      setAlert("Hasła powinnny być takie same", "danger");
     } else {
-      try {
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
-        const body = upUser;
-        const res = await axios.put(
-          "/api/users/reset/" + match.params.id,
-          body,
-          config
-        );
-        history.push("/users");
-      } catch (err) {
-        console.log(err);
-      }
+      editUserPassword(match.params.id, formData, history);
     }
   };
   return (
@@ -84,4 +76,18 @@ const EditUserPassword = ({ match, history }) => {
   );
 };
 
-export default EditUserPassword;
+ResetUserPassword.propTypes = {
+  editUserPassword: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  user: state.users,
+});
+
+export default connect(mapStateToProps, {
+  editUserPassword,
+  getUser,
+  setAlert,
+})(ResetUserPassword);

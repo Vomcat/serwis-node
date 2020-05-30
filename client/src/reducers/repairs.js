@@ -10,6 +10,7 @@ const initialState = {
   repair: null,
   repairs: [],
   error: {},
+  loading: true,
 };
 
 export default function (state = initialState, action) {
@@ -26,6 +27,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         repair: payload,
+        loading: false,
       };
     case GET_REPAIRS:
       return {

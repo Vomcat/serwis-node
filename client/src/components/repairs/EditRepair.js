@@ -1,10 +1,20 @@
-import React, { useState, Fragment, useEffect } from "react";
-import axios from "axios";
+import React, { useState, Fragment, useEffect, useRef } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import { getRepair, updateRepair } from "../../actions/repairs";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
-const EditRepair = ({ match, history }) => {
-  const [formData, SetData] = useState({
+const EditRepair = ({
+  repair: { repair, loading },
+  getRepair,
+  updateRepair,
+  history,
+  match,
+}) => {
+  const [formData, SetFormData] = useState({
+    repairid: match.params.id,
     first_name: "",
     last_name: "",
     phone_number: "",
@@ -14,28 +24,10 @@ const EditRepair = ({ match, history }) => {
     imei: "",
     description: "",
     cost: "",
-    dateEnd: "",
+    status: "",
   });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get("/api/repairs/" + match.params.id);
-      SetData({
-        first_name: !res.data.first_name ? "" : res.data.first_name,
-        last_name: !res.data.last_name ? "" : res.data.last_name,
-        phone_number: !res.data.phone_number ? "" : res.data.phone_number,
-        email: !res.data.email ? "" : res.data.email,
-        device: !res.data.device ? "" : res.data.device,
-        code: !res.data.code ? "" : res.data.code,
-        imei: !res.data.imei ? "" : res.data.imei,
-        description: !res.data.description ? "" : res.data.description,
-        cost: !res.data.cost ? "" : res.data.cost,
-      });
-    };
-    fetchData();
-  }, []);
-
   const {
+    repairid,
     first_name,
     last_name,
     phone_number,
@@ -46,10 +38,56 @@ const EditRepair = ({ match, history }) => {
     description,
     cost,
     status,
-    dateEnd,
   } = formData;
+
+  useEffect(() => {
+    getRepair(repairid);
+  }, [repairid, getRepair]);
+
+  const useIsMounted = () => {
+    const isMounted = useRef(false);
+    useEffect(() => {
+      isMounted.current = true;
+      return () => (isMounted.current = false);
+    }, []);
+    return isMounted;
+  };
+
+  const isMounted = useIsMounted();
+
+  useEffect(() => {
+    if (loading === false && isMounted.current) {
+      const {
+        repairid,
+        first_name,
+        last_name,
+        phone_number,
+        email,
+        device,
+        code,
+        imei,
+        description,
+        cost,
+        status,
+      } = repair;
+      SetFormData({
+        repairid,
+        first_name,
+        last_name,
+        phone_number,
+        email,
+        device,
+        code,
+        imei,
+        description,
+        cost,
+        status,
+      });
+    }
+  }, [repair, isMounted, loading]);
+
   const onChange = (e) =>
-    SetData({ ...formData, [e.target.name]: e.target.value });
+    SetFormData({ ...formData, [e.target.name]: e.target.value });
 
   const print = () => {
     var usersRows = [];
@@ -105,87 +143,6 @@ const EditRepair = ({ match, history }) => {
     doc.save("naprawa.pdf");
   };
 
-  /* 
-const ustawka = {
-  first_name: "",
-  last_name: "",
-  phone_number: "",
-  email: "",
-  device: "",
-  code: "",
-  imei: "",
-  description: "",
-  cost: ""
-};
-
-const EditRepair = ({
-  repair: { repair },
-  getRepair,
-  updaterepair,
-  history,
-  match
-}) => {
-  const [formData, SetFormData] = useState(ustawka);
-
-  useEffect(() => {
-    console.log(typeof getRepair(match.params.id));
-    getRepair(match.params.id);
-    const repairDara = { ...ustawka };
-    for (const key in repair) {
-      if (key in repairDara) repairDara[key] = repair[key];
-    }
-    SetFormData(repairDara);
-  }, [getRepair]);
-
-  const {
-    first_name,
-    last_name,
-    phone_number,
-    email,
-    device,
-    code,
-    imei,
-    description,
-    cost,
-    status
-  } = formData;
-
-  const onChange = e =>
-    SetFormData({ ...formData, [e.target.name]: e.target.value }); */
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    const upUser = {
-      first_name,
-      last_name,
-      phone_number,
-      email,
-      device,
-      code,
-      imei,
-      description,
-      cost,
-      status,
-      dateEnd,
-    };
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const body = upUser;
-      const res = await axios.put(
-        "/api/repairs/" + match.params.id,
-        body,
-        config
-      );
-
-      history.push("/repairs");
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <Fragment>
       <div className="container container--flex ">
@@ -193,7 +150,13 @@ const EditRepair = ({
           <div className="form-items-wrapper">
             <h1>Nowa Naprawa</h1>
           </div>
-          <form className="form" onSubmit={(e) => onSubmit(e)}>
+          <form
+            className="form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              updateRepair(match.params.id, formData, history);
+            }}
+          >
             <div className="row row-space">
               <div className="col-2">
                 <div className="form-input-wrapper">
@@ -378,4 +341,15 @@ const EditRepair = ({
   );
 };
 
-export default EditRepair;
+EditRepair.propTypes = {
+  getRepair: PropTypes.func.isRequired,
+  updateRepair: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  repair: state.repairs,
+});
+
+export default connect(mapStateToProps, { updateRepair, getRepair })(
+  EditRepair
+);

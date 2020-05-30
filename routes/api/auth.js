@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 
 const User = require("../../models/User");
 
-router.get("/", auth, async (req, res) => {
+router.get("/auth", auth, async (req, res) => {
   try {
     console.log(User);
     const user = await User.findById(req.user.id).select("-password");
@@ -19,7 +19,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 router.post(
-  "/",
+  "/auth",
   [
     check("email", "Wprowadz email").isEmail(),
     check("password", "haslo jest wymagane").exists(),
