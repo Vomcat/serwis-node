@@ -16,8 +16,8 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
       <li>
         <Link to="/newRepair">Nowa naprawa</Link>
       </li>
-      <li className="nav-item dropdown" onClick={() => setDropMenu(!dropMenu)}>
-        <a aria-haspopup="true">{(admin.first_name, admin.last_name)}</a>
+      <li className="nav-item " onClick={() => setDropMenu(!dropMenu)}>
+        <div>{admin.last_name}</div>
         {dropMenu && (
           <ul className="dropdown">
             {admin.status ? (
@@ -40,13 +40,9 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
                 </li>
               </Fragment>
             ) : null}
+
             <li>
-              <Link className="dropdown-item" to="/users">
-                Ustawienia
-              </Link>
-            </li>
-            <li>
-              <a className="dropdown-item" onClick={logout} href="#!" href="#">
+              <a className="dropdown-item" onClick={logout} href="#!">
                 Wyloguj
               </a>
             </li>
@@ -59,22 +55,26 @@ const Navbar = ({ auth: { isAuthenticated, user }, logout }) => {
   const guestLinks = (
     <ul>
       <li>
-        <Link to="/login">Login</Link>
+        <Link to="/login">Zaloguj</Link>
       </li>
     </ul>
   );
   return (
     <nav className="navbar">
       <div className="navbar-con">
-        <h2>
-          <Link to="/">
-            <i className="navbar-brand" /> Serwis
-          </Link>
-        </h2>
-        <Fragment>
-          {" "}
-          {isAuthenticated ? authLink : guestLinks} {}
-        </Fragment>
+        <div className="navbar-mobile-logo">
+          <h2>
+            <Link to="/">
+              <i className="navbar-brand" /> Serwis
+            </Link>
+          </h2>
+        </div>
+        <div className="navbar-mobile">
+          <Fragment>
+            {" "}
+            {isAuthenticated ? authLink : guestLinks} {}
+          </Fragment>
+        </div>
       </div>
     </nav>
   );

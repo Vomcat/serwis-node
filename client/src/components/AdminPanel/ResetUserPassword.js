@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect, useRef } from "react";
+import React, { useState, Fragment } from "react";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { editUserPassword, getUser } from "../../actions/users";
@@ -17,7 +17,7 @@ const ResetUserPassword = ({
     password2: "",
   });
 
-  const { password, password2, status } = formData;
+  const { password, password2 } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });

@@ -19,7 +19,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isAuthenticated: true,
-
         user: payload,
       };
 
@@ -39,6 +38,7 @@ export default function (state = initialState, action) {
         ...state,
         token: null,
         isAuthenticated: false,
+        user: null,
       };
     default:
       return state;

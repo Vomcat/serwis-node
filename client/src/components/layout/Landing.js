@@ -13,13 +13,12 @@ const Landing = ({ isAuthenticated }) => {
       <div className="landing">
         <div className="container">
           <section className="landing__info">
-            <h1 className="cover-heading">Serwis komputerowy</h1>
+            <h1 className="form-heading">Serwis komputerowy</h1>
             <p className="lead">Zaloguj się na swoje konto</p>
-            <p className="lead">
-              <Link to="/login" className="btn btn--green ">
-                Login
-              </Link>
-            </p>
+
+            <Link to="/login" className="btn btn--green ">
+              Zaloguj się
+            </Link>
           </section>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { Link } from "react-router-dom";
-import Axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getAllRepairs } from "../../actions/repairs";
@@ -19,9 +18,7 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
     result != ""
       ? result.map((repair) => (
           <tr>
-            <td scope="row" data-label="Imię">
-              {repair.first_name}
-            </td>
+            <td data-label="Imię">{repair.first_name}</td>
             <td data-label="Nazwisko">{repair.last_name}</td>
             <td data-label="Numer tel.">{repair.phone_number}</td>
             <td data-label="Email">{repair.email}</td>
@@ -48,9 +45,7 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
         ))
       : repairs.map((repair) => (
           <tr key={repair._id}>
-            <td scope="row" data-label="Imię">
-              {repair.first_name}
-            </td>
+            <td data-label="Imię">{repair.first_name}</td>
             <td data-label="Nazwisko">{repair.last_name}</td>
             <td data-label="Numer tel.">{repair.phone_number}</td>
             <td data-label="Email">{repair.email}</td>
@@ -81,7 +76,7 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
     <Fragment>
       <div className="container">
         <div className="form-body table-body">
-          <div class="form-items-wrapper">
+          <div className="form-items-wrapper">
             <h2>Naprawy</h2>
           </div>
           <form className="form-inline my-2 my-lg-0">
@@ -89,7 +84,7 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
               <input
                 className="form-control"
                 type="search"
-                placeholder="Search"
+                placeholder="Szukaj"
                 aria-label="Search"
                 value={search}
                 onChange={(e) => onChange(e)}
@@ -122,14 +117,11 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
 Repairs.propTypes = {
   auth: PropTypes.object.isRequired,
   getAllRepairs: PropTypes.func.isRequired,
-  getRepair: PropTypes.func.isRequired,
   deleteRepair: PropTypes.func.isRequired,
-
   repair: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
   repair: state.repairs,
 });
 

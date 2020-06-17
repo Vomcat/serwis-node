@@ -34,39 +34,42 @@ const Stats = () => {
   }, []);
 
   const allRepairsNumer = repairs.filter((x) => {
-    return moment(x.date).format("YYYY") == yearValue;
+    return moment(x.dateEnd).format("YYYY") == yearValue;
   }).length;
+
   const endedRepairs = repairs.filter((x) => {
     return (
-      x.status == "Zakończona" && moment(x.date).format("YYYY") == yearValue
+      x.status == "Zakończona" && moment(x.dateEnd).format("YYYY") == yearValue
     );
   }).length;
   const warrantyRepairs = repairs.filter((x) => {
     return (
-      x.status == "Gwarancja" && moment(x.date).format("YYYY") == yearValue
+      x.status == "Gwarancja" && moment(x.dateEnd).format("YYYY") == yearValue
     );
   }).length;
   const returnedRepairs = repairs.filter((x) => {
     return (
-      x.status == "Reklamacja" && moment(x.date).format("YYYY") == yearValue
+      x.status == "Reklamacja" && moment(x.dateEnd).format("YYYY") == yearValue
     );
   }).length;
 
   const mapDayToMonth = repairs.map((x) => ({
     ...x,
-    month: moment(x.date).format("M"),
+    month: moment(x.dateEnd).format("M"),
   }));
   const setMonthValue = mapDayToMonth
-    .filter((x) => moment(x.date).format("YYYY") == yearValue)
+    .filter((x) => moment(x.dateEnd).format("YYYY") == yearValue)
     .reduce((acc, cur) => {
       acc[cur.month] = acc[cur.month] + cur.cost || cur.cost;
       return acc;
     }, []);
+  console.log({ setMonthValue });
 
   const repairsSum = repairs
     .filter(
       (x) =>
-        x.status == "Zakończona" && moment(x.date).format("YYYY") == yearValue
+        x.status == "Zakończona" &&
+        moment(x.dateEnd).format("YYYY") == yearValue
     )
     .reduce((acc, cur) => {
       return acc + +cur.cost;
@@ -75,7 +78,8 @@ const Stats = () => {
   const repairsCount = repairs
     .filter(
       (x) =>
-        x.status == "Zakończona" && moment(x.date).format("YYYY") == yearValue
+        x.status == "Zakończona" &&
+        moment(x.dateEnd).format("YYYY") == yearValue
     )
     .reduce((acc, cur) => {
       return acc + +cur.cost;

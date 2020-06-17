@@ -19,7 +19,6 @@ router.get("/auth", auth, async (req, res) => {
   }
 });
 router.post(
-  "/auth",
   [
     check("email", "Wprowadz email").isEmail(),
     check("password", "haslo jest wymagane").exists(),

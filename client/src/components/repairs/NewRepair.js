@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addNewRepair } from "../../actions/repairs";
-import { renderToString } from "react-dom/server";
+
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
@@ -269,7 +269,7 @@ const NewRepair = ({ addNewRepair, history }) => {
                       <option value="0">Wybierz status naprawy</option>
                       <option value="Otwarta">Otwarta</option>
                       <option value="Reklamacja"> Reklamacja</option>
-                      <option value="Gwaracnja">Gwaracnja</option>
+                      <option value="Gwarancja">Gwarancja</option>
                       <option value="Zakończona">Zakończona</option>
                     </select>
                   </div>

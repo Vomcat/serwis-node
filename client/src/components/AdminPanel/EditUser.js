@@ -1,12 +1,12 @@
 import React, { useState, Fragment, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-import { setAlert } from "../../actions/alert";
+
 import { editUser, getUser } from "../../actions/users";
 import PropTypes from "prop-types";
 
 const EditUser = ({
   user: { user, loading },
-  setAlert,
+
   editUser,
   getUser,
   history,

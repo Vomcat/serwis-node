@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
 
-const Login = ({ login, isAuthenticated, auth }) => {
+const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,9 +18,6 @@ const Login = ({ login, isAuthenticated, auth }) => {
     e.preventDefault();
     login(email, password);
   };
-
-  //przekeierowanie
-
   if (isAuthenticated) {
     return <Redirect to="/repairs" />;
   }
@@ -60,7 +57,7 @@ const Login = ({ login, isAuthenticated, auth }) => {
                   <input
                     type="submit"
                     className="btn btn--green"
-                    value="Login"
+                    value="Zaloguj się"
                   />
                 </div>
               </form>
@@ -78,6 +75,5 @@ Login.propTypes = {
 };
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  auth: state.auth,
 });
 export default connect(mapStateToProps, { login })(Login);

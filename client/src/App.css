@@ -65,7 +65,6 @@ h2 {
 
 .navbar {
   position: fixed;
-
   padding: 0.7rem 2rem;
   z-index: 1;
   width: 100%;
@@ -83,8 +82,11 @@ h2 {
   margin: auto;
 }
 
-.navbar ul {
+.navbar > ul {
   display: flex;
+}
+.nav-item {
+  cursor: pointer;
 }
 
 .navbar a {
@@ -123,39 +125,23 @@ li a {
   color: #fff;
 }
 
-li:hover,
-li:focus-within {
-  cursor: pointer;
-}
-
-li:focus-within a {
-  outline: none;
-}
-
-ul li ul {
-  background: rgb(15, 15, 15);
-  visibility: hidden;
-  opacity: 0;
-  min-width: 5rem;
+.dropdown {
   position: absolute;
   transition: all 0.5s ease;
-  margin-top: 1rem;
+  margin-top: 54px;
   left: 0;
-  display: none;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: inline-block;
 }
-
-ul li:hover > ul,
-ul li:focus-within > ul,
-ul li ul:hover,
-ul li ul:focus {
-  visibility: visible;
-  opacity: 1;
-  display: block;
+.dropdown ul {
+  padding: 0;
+  margin: 0;
 }
-
-ul li ul li {
-  clear: both;
-  width: 100%;
+.dropdown ul li {
+  padding: 30px 20px;
+  font-weight: 600;
+  color: rgb(58, 55, 55);
+  font-size: 16px;
 }
 
 /*LANDING*/
@@ -172,6 +158,10 @@ ul li ul li {
   left: 0;
   width: 100%;
   height: 100%;
+}
+.lead {
+  color: #fff;
+  padding: 0.5rem;
 }
 .background__image {
   position: relative;
@@ -203,7 +193,7 @@ ul li ul li {
   justify-content: center;
 }
 .btn--small {
-  min-width: 50px;
+  min-width: 100%;
   height: 40px;
   font-size: 0.8rem;
 }
@@ -314,11 +304,6 @@ ul li ul li {
   display: block;
   margin-bottom: 5px;
 }
-@media (max-width: 767px) {
-  .col-2 {
-    width: 100%;
-  }
-}
 
 .select-css {
   display: block;
@@ -351,29 +336,6 @@ select-css:focus {
 .select-css option {
   font-weight: normal;
 }
-/* .form-signin .checkbox {
-  font-weight: 400;
-}
-.form-signin .form-control {
-  position: relative;
-  box-sizing: border-box;
-  height: auto;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-} */
 
 /*STATS*/
 .stats-row {
@@ -388,7 +350,7 @@ select-css:focus {
 
 /*TABLE*/
 .table-body {
-  padding: 10px;
+  padding: 40px;
 }
 table {
   border-bottom: 1px solid #ccc;
@@ -430,7 +392,58 @@ table th {
   text-transform: uppercase;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 1rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  .form-heading {
+    font-size: 1rem;
+  }
+  li,
+  h3,
+  .form-control,
+  .select-css,
+  .btn,
+  .label {
+    font-size: 0.8rem;
+  }
+  li {
+    padding: 0;
+  }
+  .btn {
+    min-width: 100px;
+    height: 40px;
+  }
+
+  .col-2 {
+    width: 100%;
+  }
+
+  .form-repair,
+  .form-login {
+    width: 460px;
+  }
+  .dropdown {
+    margin-top: 32px;
+  }
+  .dropdown > li {
+    padding: 0.3rem;
+  }
+  .navbar-con {
+    flex-wrap: wrap;
+  }
+  .navbar-mobile-logo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 0.3rem;
+  }
+  .navbar-mobile-items {
+    display: flex;
+  }
   table {
     border: 0;
   }
@@ -464,10 +477,6 @@ table th {
   }
 
   table td::before {
-    /*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
     content: attr(data-label);
     float: left;
     font-weight: bold;

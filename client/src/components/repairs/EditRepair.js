@@ -1,7 +1,6 @@
 import React, { useState, Fragment, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
 import { getRepair, updateRepair } from "../../actions/repairs";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
@@ -148,7 +147,7 @@ const EditRepair = ({
       <div className="container container--flex ">
         <div className="form-body form-repair">
           <div className="form-items-wrapper">
-            <h1>Nowa Naprawa</h1>
+            <h1>Edytuj naprawę</h1>
           </div>
           <form
             className="form"
@@ -323,7 +322,7 @@ const EditRepair = ({
                       <option value="0">Wybierz status naprawy</option>
                       <option value="Otwarta">Otwarta</option>
                       <option value="Reklamacja"> Reklamacja</option>
-                      <option value="Gwaracnja">Gwaracnja</option>
+                      <option value="Gwarancja">Gwarancja</option>
                       <option value="Zakończona">Zakończona</option>
                     </select>
                   </div>

@@ -12,9 +12,7 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
 
   const table = users.map((user) => (
     <tr key={user._id}>
-      <td scope="row" data-label="Imię">
-        {user.name}
-      </td>
+      <td data-label="Imię">{user.name}</td>
       <td data-label="Imię">{user.first_name}</td>
       <td data-label="Imię">{user.last_name}</td>
       <td data-label="Imię">{user.email}</td>
