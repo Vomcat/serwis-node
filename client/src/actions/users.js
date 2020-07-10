@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../util/api";
 import {
   ADD_USER,
   USER_ERROR,
@@ -12,12 +12,7 @@ import { setAlert } from "./alert";
 
 export const add = ({ formData, history }) => async (dispatch) => {
   try {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const res = await axios.post("/api/users", formData, config);
+    const res = await api.post("/users", formData);
 
     dispatch({
       type: ADD_USER,
@@ -35,7 +30,7 @@ export const add = ({ formData, history }) => async (dispatch) => {
 
 export const editUser = (id, formData, history) => async (dispatch) => {
   try {
-    const res = await axios.put(`/api/users/editUser/${id}`, formData);
+    const res = await api.put(`/users/editUser/${id}`, formData);
     dispatch({
       type: EDIT_USER,
       payload: res.data,
@@ -55,7 +50,7 @@ export const editUser = (id, formData, history) => async (dispatch) => {
 
 export const editUserPassword = (id, formData, history) => async (dispatch) => {
   try {
-    const res = await axios.put(`/api/users/reset/${id}`, formData);
+    const res = await api.put(`/users/reset/${id}`, formData);
     dispatch({
       type: EDIT_USER_PASSWORD,
       payload: res.data,
@@ -75,7 +70,7 @@ export const editUserPassword = (id, formData, history) => async (dispatch) => {
 
 export const getAllUsers = () => async (dispatch) => {
   try {
-    const res = await axios.get("api/users");
+    const res = await api.get("/users");
     dispatch({
       type: GET_USERS,
       payload: res.data,
@@ -89,7 +84,7 @@ export const getAllUsers = () => async (dispatch) => {
 
 export const getUser = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/users/${id}`);
+    const res = await api.get(`/users/${id}`);
 
     dispatch({
       type: GET_USER,
@@ -105,7 +100,7 @@ export const getUser = (id) => async (dispatch) => {
 export const deleteUser = (id) => async (dispatch) => {
   if (window.confirm("Napewno usunąć? "))
     try {
-      const res = await axios.delete(`api/users/${id}`);
+      const res = await api.delete(`/users/${id}`);
 
       dispatch({
         type: DELETE_USER,

@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../util/api";
 import { setAlert } from "./alert";
 
 import {
@@ -13,7 +13,7 @@ import {
 
 export const getAllRepairs = () => async (dispatch) => {
   try {
-    const res = await axios.get("api/repairs");
+    const res = await api.get("/repairs");
     dispatch({
       type: GET_REPAIRS,
       payload: res.data,
@@ -27,7 +27,7 @@ export const getAllRepairs = () => async (dispatch) => {
 
 export const getRepair = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/repairs/${id}`);
+    const res = await api.get(`/repairs/${id}`);
 
     dispatch({
       type: GET_REPAIR,
@@ -42,13 +42,7 @@ export const getRepair = (id) => async (dispatch) => {
 
 export const addNewRepair = (formData, history) => async (dispatch) => {
   try {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const res = await axios.post("/api/repairs", formData, config);
+    const res = await api.post("/repairs", formData);
     dispatch({
       type: ADD_REPAIR,
       payload: res.data,
@@ -67,7 +61,7 @@ export const addNewRepair = (formData, history) => async (dispatch) => {
 
 export const updateRepair = (id, formData, history) => async (dispatch) => {
   try {
-    const res = await axios.put(`/api/repairs/${id}`, formData);
+    const res = await api.put(`/repairs/${id}`, formData);
     dispatch({
       type: ADD_REPAIR,
       payload: res.data,
@@ -88,7 +82,7 @@ export const updateRepair = (id, formData, history) => async (dispatch) => {
 export const deleteRepair = (id) => async (dispatch) => {
   if (window.confirm("Napewno usunąć? "))
     try {
-      const res = await axios.delete(`api/repairs/${id}`);
+      const res = await api.delete(`/repairs/${id}`);
 
       dispatch({
         type: DELETE_REPAIR,

@@ -1,6 +1,5 @@
 import React, { useState, Fragment, useEffect, useRef } from "react";
 import { connect } from "react-redux";
-
 import { editUser, getUser } from "../../actions/users";
 import PropTypes from "prop-types";
 

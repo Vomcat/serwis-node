@@ -1,11 +1,15 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { Link } from "react-router-dom";
-import Axios from "axios";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getAllRepairs } from "../../../actions/repairs";
 import moment from "moment";
 import Chart from "./ChartYear";
 import PieChart from "./PieChart";
 
-const Stats = () => {
+const Stats = ({ repair: { repairs }, getAllRepairs }) => {
+  useEffect(() => {
+    getAllRepairs();
+  }, [getAllRepairs]);
   const miesiac = [
     "",
     "Styczeń",
@@ -22,16 +26,7 @@ const Stats = () => {
     "Grudzień",
   ];
 
-  const [repairs, setRepairs] = useState([]);
   const [yearValue, setyearValue] = useState(new Date().getFullYear());
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await Axios.get("/api/repairs/");
-      setRepairs(res.data);
-    };
-    fetchData();
-  }, []);
 
   const allRepairsNumer = repairs.filter((x) => {
     return moment(x.dateEnd).format("YYYY") == yearValue;
@@ -39,7 +34,7 @@ const Stats = () => {
 
   const endedRepairs = repairs.filter((x) => {
     return (
-      x.status == "Zakończona" && moment(x.dateEnd).format("YYYY") == yearValue
+      x.status == "Zako?czona" && moment(x.dateEnd).format("YYYY") == yearValue
     );
   }).length;
   const warrantyRepairs = repairs.filter((x) => {
@@ -68,7 +63,7 @@ const Stats = () => {
   const repairsSum = repairs
     .filter(
       (x) =>
-        x.status == "Zakończona" &&
+        x.status == "Zako?czona" &&
         moment(x.dateEnd).format("YYYY") == yearValue
     )
     .reduce((acc, cur) => {
@@ -78,7 +73,7 @@ const Stats = () => {
   const repairsCount = repairs
     .filter(
       (x) =>
-        x.status == "Zakończona" &&
+        x.status == "Zako?czona" &&
         moment(x.dateEnd).format("YYYY") == yearValue
     )
     .reduce((acc, cur) => {
@@ -134,5 +129,15 @@ const Stats = () => {
     </Fragment>
   );
 };
+Stats.propTypes = {
+  getAllRepairs: PropTypes.func.isRequired,
+  repair: PropTypes.object.isRequired,
+};
 
-export default Stats;
+const mapStateToProps = (state) => ({
+  repair: state.repairs,
+});
+
+export default connect(mapStateToProps, {
+  getAllRepairs,
+})(Stats);

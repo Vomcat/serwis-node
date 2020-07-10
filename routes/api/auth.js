@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 
 const User = require("../../models/User");
 
-router.get("/auth", auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     console.log(User);
     const user = await User.findById(req.user.id).select("-password");
@@ -19,6 +19,7 @@ router.get("/auth", auth, async (req, res) => {
   }
 });
 router.post(
+  "/",
   [
     check("email", "Wprowadz email").isEmail(),
     check("password", "haslo jest wymagane").exists(),
@@ -57,7 +58,7 @@ router.post(
       jwt.sign(
         payload,
         config.get("jwtSecret"),
-        { expiresIn: 30 },
+        { expiresIn: 36000 },
         (err, token) => {
           if (err) throw err;
           res.json({ token });

@@ -43,7 +43,7 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
             </td>
           </tr>
         ))
-      : repairs.map((repair) => (
+      : repairs./*slice(0, 10).*/ map((repair) => (
           <tr key={repair._id}>
             <td data-label="Imię">{repair.first_name}</td>
             <td data-label="Nazwisko">{repair.last_name}</td>
@@ -122,6 +122,7 @@ Repairs.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   repair: state.repairs,
 });
 

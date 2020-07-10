@@ -85,8 +85,8 @@ h2 {
 .navbar > ul {
   display: flex;
 }
-.nav-item {
-  cursor: pointer;
+.nav-item:hover {
+  color: var(--primary-color);
 }
 
 .navbar a {
@@ -112,7 +112,6 @@ ul {
 
 li {
   color: #fff;
-
   display: block;
   float: left;
   padding: 1rem;
@@ -128,10 +127,11 @@ li a {
 .dropdown {
   position: absolute;
   transition: all 0.5s ease;
-  margin-top: 54px;
-  left: 0;
+  margin-top: 28px;
+  right: 0;
   background-color: rgba(0, 0, 0, 0.7);
   display: inline-block;
+  width: 180px;
 }
 .dropdown ul {
   padding: 0;
@@ -142,6 +142,9 @@ li a {
   font-weight: 600;
   color: rgb(58, 55, 55);
   font-size: 16px;
+}
+.dropdown a {
+  margin: 0px;
 }
 
 /*LANDING*/
@@ -427,7 +430,8 @@ table th {
     width: 460px;
   }
   .dropdown {
-    margin-top: 32px;
+    margin-top: 12px;
+    width: 134px;
   }
   .dropdown > li {
     padding: 0.3rem;
