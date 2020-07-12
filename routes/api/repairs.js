@@ -7,16 +7,18 @@ const Repairs = require("../../models/Repairs");
 
 router.post(
   "/",
-
   [
-    check("first_name", "Imie jest wymagane").not().isEmpty(),
-    check("last_name", "Nazwisko jest wymagane").not().isEmpty(),
-    check("device", "Nazwa jest wymagana").not().isEmpty(),
-    check("imei", "Imei jest wymagany").not().isEmpty(),
-    check("description", "Opis jest wymagany").not().isEmpty(),
-    check("cost", "Opis jest wymagany").not().isEmpty(),
-  ],
+    auth,
 
+    [
+      check("first_name", "Imie jest wymagane").not().isEmpty(),
+      check("last_name", "Nazwisko jest wymagane").not().isEmpty(),
+      check("device", "Nazwa jest wymagana").not().isEmpty(),
+      check("imei", "Imei jest wymagany").not().isEmpty(),
+      check("description", "Opis jest wymagany").not().isEmpty(),
+      check("cost", "Opis jest wymagany").not().isEmpty(),
+    ],
+  ],
   async (req, res) => {
     const erros = validationResult(req);
     if (!erros.isEmpty()) {
@@ -99,7 +101,6 @@ router.put(
   }
 );
 
-// get all repairs
 router.get("/", auth, async (req, res) => {
   try {
     const repairs = await Repairs.find().sort({ date: -1 });
@@ -137,17 +138,5 @@ router.delete("/:id", auth, async (req, res) => {
     res.status(500).send("ServerError");
   }
 });
-/* router.delete("/", async (req, res) => {
-  try {
-    await Repairs.deleteMany({ device: "value" });
-    res.json({ msg: "Naprawa usunięta" });
-  } catch (err) {
-    console.error(err.message);
-    if (err.kind === "ObjectId") {
-      return res.status(404).json({ msg: "Nie am takiej naprawy" });
-    }
-    res.status(500).send("ServerError");
-  }
-}); */
 
 module.exports = router;

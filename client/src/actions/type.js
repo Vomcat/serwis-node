@@ -1,6 +1,3 @@
-export const SET_ALERT = "SET_ALERT";
-export const REMOVE_ALERT = "REMOVE_ALERT";
-
 export const ADD_USER = "ADD_USER";
 export const EDIT_USER = "EDIT_USER";
 export const EDIT_USER_PASSWORD = "EDIT_USER_PASSWORD";

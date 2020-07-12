@@ -34,7 +34,7 @@ const Stats = ({ repair: { repairs }, getAllRepairs }) => {
 
   const endedRepairs = repairs.filter((x) => {
     return (
-      x.status == "Zako?czona" && moment(x.dateEnd).format("YYYY") == yearValue
+      x.status == "Zakończona" && moment(x.dateEnd).format("YYYY") == yearValue
     );
   }).length;
   const warrantyRepairs = repairs.filter((x) => {
@@ -63,7 +63,7 @@ const Stats = ({ repair: { repairs }, getAllRepairs }) => {
   const repairsSum = repairs
     .filter(
       (x) =>
-        x.status == "Zako?czona" &&
+        x.status == "Zakończona" &&
         moment(x.dateEnd).format("YYYY") == yearValue
     )
     .reduce((acc, cur) => {
@@ -73,7 +73,7 @@ const Stats = ({ repair: { repairs }, getAllRepairs }) => {
   const repairsCount = repairs
     .filter(
       (x) =>
-        x.status == "Zako?czona" &&
+        x.status == "Zakończona" &&
         moment(x.dateEnd).format("YYYY") == yearValue
     )
     .reduce((acc, cur) => {

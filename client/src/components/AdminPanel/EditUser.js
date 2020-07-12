@@ -13,13 +13,13 @@ const EditUser = ({
 }) => {
   const [formData, SetFormData] = useState({
     userid: match.params.id,
-    name: "",
+
     first_name: "",
     last_name: "",
     email: "",
     status: "",
   });
-  const { userid, name, first_name, last_name, email, status } = formData;
+  const { userid, first_name, last_name, email, status } = formData;
 
   useEffect(() => {
     getUser(userid);
@@ -38,10 +38,10 @@ const EditUser = ({
 
   useEffect(() => {
     if (loading === false && isMounted.current) {
-      const { userid, name, first_name, last_name, email, status } = user;
+      const { userid, first_name, last_name, email, status } = user;
       SetFormData({
         userid,
-        name,
+
         first_name,
         last_name,
         email,
@@ -68,17 +68,7 @@ const EditUser = ({
               <div className="form-items-wrapper">
                 <h1 className="form-heading">Edytuj dane pracownika</h1>
               </div>
-              <div className="form-input-wrapper">
-                <input
-                  type="text"
-                  name="name"
-                  className="form-control"
-                  placeholder=" Nazwa użytkownika"
-                  value={name}
-                  onChange={(e) => onChange(e)}
-                  required
-                />
-              </div>
+
               <div className="form-input-wrapper">
                 <input
                   type="text"
@@ -120,8 +110,8 @@ const EditUser = ({
                   className="select-css"
                 >
                   <option value="0">Rodzaj użytkownika</option>
-                  <option value="false">Admin</option>
-                  <option value="true"> User</option>
+                  <option value="false">Pracownik</option>
+                  <option value="true"> Admin</option>
                 </select>
               </div>
               <div className="form-items-wrapper">
@@ -138,7 +128,6 @@ const EditUser = ({
 EditUser.propTypes = {
   editUser: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
-  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

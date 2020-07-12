@@ -21,8 +21,6 @@ import "./App.css";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Alert from "./components/layout/Alert";
-
 import store from "./store";
 import { loadUser } from "./actions/auth";
 import AuthToken from "./util/AuthToken";
@@ -39,7 +37,6 @@ const App = () => {
         <Fragment>
           <Navbar />
           <Route exact path="/" component={Landing} />
-          <Alert />
           <Switch>
             <Route exact path="/login" component={Login} />
             <PrivateRoutes exact path="/new" component={NewUser} />

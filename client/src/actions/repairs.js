@@ -1,5 +1,4 @@
 import api from "../util/api";
-import { setAlert } from "./alert";
 
 import {
   GET_REPAIRS,
@@ -8,8 +7,6 @@ import {
   ADD_REPAIR,
   DELETE_REPAIR,
 } from "./type";
-
-//wszystkie naprawy
 
 export const getAllRepairs = () => async (dispatch) => {
   try {
@@ -47,9 +44,6 @@ export const addNewRepair = (formData, history) => async (dispatch) => {
       type: ADD_REPAIR,
       payload: res.data,
     });
-
-    dispatch(setAlert("Utworzono naprawę", "success"));
-
     history.push("/repairs");
   } catch (err) {
     dispatch({
@@ -66,9 +60,6 @@ export const updateRepair = (id, formData, history) => async (dispatch) => {
       type: ADD_REPAIR,
       payload: res.data,
     });
-
-    dispatch(setAlert(("Zmiany zostały wprowadzone", "success")));
-
     history.push("/repairs");
   } catch (err) {
     console.log(err);
@@ -88,7 +79,6 @@ export const deleteRepair = (id) => async (dispatch) => {
         type: DELETE_REPAIR,
         payload: id,
       });
-      dispatch(setAlert("Naprawa usunięta"));
     } catch (err) {
       console.log(err);
     }

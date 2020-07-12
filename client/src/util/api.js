@@ -8,17 +8,10 @@ const api = axios.create({
     "Content-Type": "application/json",
   },
 });
-/**
-   intercept any error responses from the api
-   and check if the token is no longer valid.
-   ie. Token has expired
-   logout the user if the token has expired
-  **/
-
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response.data.msg === "Token is not valid") {
+    if (err.response.data.msg === "Token nie działa") {
       store.dispatch({ type: LOGOUT });
     }
     return Promise.reject(err);

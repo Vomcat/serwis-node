@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers/index";
-import setAuthToken from "./util/AuthToken";
+import authToken from "./util/AuthToken";
 
 const initialState = {};
 
@@ -21,7 +21,7 @@ store.subscribe(() => {
   currentState = store.getState();
   if (previousState.auth.token !== currentState.auth.token) {
     const token = currentState.auth.token;
-    setAuthToken(token);
+    authToken(token);
   }
 });
 export default store;

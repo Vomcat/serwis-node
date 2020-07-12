@@ -5,18 +5,23 @@ import { connect } from "react-redux";
 import { getAllUsers } from "../../actions/users";
 import { deleteUser } from "../../actions/users";
 
-const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
+const Users = ({
+  user: { users },
+  auth: { user },
+  getAllUsers,
+  deleteUser,
+}) => {
   useEffect(() => {
     getAllUsers();
   }, [getAllUsers]);
+  const admin = { ...user };
 
   const table = users.map((user) => (
     <tr key={user._id}>
-      <td data-label="Imię">{user.name}</td>
       <td data-label="Imię">{user.first_name}</td>
-      <td data-label="Imię">{user.last_name}</td>
-      <td data-label="Imię">{user.email}</td>
-      <td data-label="Imię">{user.status ? "Admin" : "Pracownik"}</td>
+      <td data-label="Naziwsko">{user.last_name}</td>
+      <td data-label="Email">{user.email}</td>
+      <td data-label="Status">{user.status ? "Admin " : " Pracownik"}</td>
 
       <td>
         <Link
@@ -35,12 +40,16 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
         </Link>
       </td>
       <td>
-        <button
-          onClick={() => deleteUser(user._id)}
-          className="btn btn--red btn--small"
-        >
-          Usuń
-        </button>
+        {admin._id === user._id ? (
+          <div></div>
+        ) : (
+          <button
+            onClick={() => deleteUser(user._id)}
+            className="btn btn--red btn--small"
+          >
+            Usuń
+          </button>
+        )}
       </td>
     </tr>
   ));
@@ -54,7 +63,6 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
           <table>
             <thead>
               <tr className="tabel-heading">
-                <th scope="col">Login</th>
                 <th scope="col">Imie</th>
                 <th scope="col">Nazwisko</th>
                 <th scope="col">Email</th>
@@ -75,13 +83,13 @@ const Users = ({ user: { users }, getAllUsers, deleteUser }) => {
 Users.propTypes = {
   getAllUsers: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
   user: state.users,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { getAllUsers, deleteUser })(Users);

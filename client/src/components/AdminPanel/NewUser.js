@@ -1,12 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
-import { setAlert } from "../../actions/alert";
 import { add } from "../../actions/users";
 import PropTypes from "prop-types";
 
-const NewUser = ({ setAlert, add, history }) => {
+const NewUser = ({ add, history }) => {
   const [formData, setFormData] = useState({
-    name: "",
     first_name: "",
     last_name: "",
     email: "",
@@ -16,7 +14,6 @@ const NewUser = ({ setAlert, add, history }) => {
   });
 
   const {
-    name,
     first_name,
     last_name,
     email,
@@ -31,7 +28,7 @@ const NewUser = ({ setAlert, add, history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (password !== password2) {
-      setAlert("Hasła powinnny być takie same", "danger");
+      alert("Hasła powinnny być takie same", "danger");
     } else {
       add({ formData, history });
     }
@@ -45,17 +42,7 @@ const NewUser = ({ setAlert, add, history }) => {
               <div className="form-items-wrapper">
                 <h1 className="form-heading">Dodaj użytkownika</h1>
               </div>
-              <div className="form-input-wrapper">
-                <input
-                  type="text"
-                  name="name"
-                  className="form-control"
-                  placeholder=" Nazwa użytkownika"
-                  value={name}
-                  onChange={(e) => onChange(e)}
-                  required
-                />
-              </div>
+
               <div className="form-input-wrapper">
                 <input
                   type="text"
@@ -121,7 +108,7 @@ const NewUser = ({ setAlert, add, history }) => {
                   >
                     <option value="0">Rodzaj użytkownika</option>
                     <option value="true">Admin</option>
-                    <option value="false"> User</option>
+                    <option value="false"> Pracownik</option>
                   </select>
                 </div>
               </div>
@@ -137,9 +124,7 @@ const NewUser = ({ setAlert, add, history }) => {
 };
 
 NewUser.propTypes = {
-  setAlert: PropTypes.func.isRequired,
   add: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -147,4 +132,4 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps, { setAlert, add })(NewUser);
+export default connect(mapStateToProps, { add })(NewUser);

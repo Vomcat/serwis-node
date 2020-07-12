@@ -8,7 +8,6 @@ import {
   EDIT_USER,
   EDIT_USER_PASSWORD,
 } from "./type";
-import { setAlert } from "./alert";
 
 export const add = ({ formData, history }) => async (dispatch) => {
   try {
@@ -18,8 +17,6 @@ export const add = ({ formData, history }) => async (dispatch) => {
       type: ADD_USER,
       payload: res.data,
     });
-    dispatch(setAlert("Dodano nowego użytkownika"));
-
     history.push("/users");
   } catch (err) {
     dispatch({
@@ -35,9 +32,6 @@ export const editUser = (id, formData, history) => async (dispatch) => {
       type: EDIT_USER,
       payload: res.data,
     });
-
-    dispatch(setAlert("Zmiany zostały wprowadzone"));
-
     history.push("/users");
   } catch (err) {
     console.log(err);
@@ -55,9 +49,6 @@ export const editUserPassword = (id, formData, history) => async (dispatch) => {
       type: EDIT_USER_PASSWORD,
       payload: res.data,
     });
-
-    dispatch(setAlert("Zmiany zostały wprowadzone"));
-
     history.push("/users");
   } catch (err) {
     console.log(err);
@@ -106,7 +97,6 @@ export const deleteUser = (id) => async (dispatch) => {
         type: DELETE_USER,
         payload: id,
       });
-      dispatch(setAlert("Użytkowinik usunięty", "success"));
     } catch (err) {
       console.log(err);
     }

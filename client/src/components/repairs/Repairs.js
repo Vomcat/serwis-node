@@ -12,7 +12,12 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
   const [search, setSearch] = useState([]);
 
   const onChange = (e) => setSearch(e.target.value);
-  const result = repairs.filter((x) => x.phone_number == search);
+  const result = repairs.filter(
+    (x) =>
+      x.phone_number == search ||
+      x.last_name == search ||
+      x.first_name == search
+  );
 
   const table =
     result != ""
@@ -43,7 +48,7 @@ const Repairs = ({ repair: { repairs }, getAllRepairs, deleteRepair }) => {
             </td>
           </tr>
         ))
-      : repairs./*slice(0, 10).*/ map((repair) => (
+      : repairs.slice(0, 10).map((repair) => (
           <tr key={repair._id}>
             <td data-label="Imię">{repair.first_name}</td>
             <td data-label="Nazwisko">{repair.last_name}</td>

@@ -6,7 +6,6 @@ import {
   LOGIN_FAIL,
   LOGOUT,
 } from "./type";
-import { setAlert } from "./alert";
 
 export const loadUser = () => async (dispatch) => {
   try {
@@ -38,9 +37,8 @@ export const login = (email, password) => async (dispatch) => {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+      errors.forEach((error) => alert(error.msg));
     }
-
     dispatch({
       type: LOGIN_FAIL,
     });

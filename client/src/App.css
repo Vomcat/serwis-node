@@ -1,9 +1,6 @@
 :root {
   --primary-color: #17a2b8;
   --dark-color: rgb(15, 15, 15);
-  --light-color: #f4f4f4;
-  --danger-color: #dc3545;
-  --success-color: #28a745;
 }
 
 * {
@@ -54,13 +51,6 @@ h2 {
   align-items: center;
 }
 
-.alert {
-  padding: 0.8rem;
-  margin: 1rem 0;
-  opacity: 0.9;
-  background: var(--light-color);
-  color: #333;
-}
 /*NAV*/
 
 .navbar {
@@ -189,6 +179,8 @@ li a {
   font-size: 18px;
   border-radius: 30px;
   cursor: pointer;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 .btn-wrapper {
   width: 100%;

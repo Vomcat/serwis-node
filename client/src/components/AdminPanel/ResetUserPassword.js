@@ -1,12 +1,10 @@
 import React, { useState, Fragment } from "react";
 import { connect } from "react-redux";
-import { setAlert } from "../../actions/alert";
 import { editUserPassword, getUser } from "../../actions/users";
 import PropTypes from "prop-types";
 
 const ResetUserPassword = ({
   user: { user, loading },
-  setAlert,
   editUserPassword,
   getUser,
   history,
@@ -25,7 +23,7 @@ const ResetUserPassword = ({
   const onSubmit = (e) => {
     e.preventDefault();
     if (password !== password2) {
-      setAlert("Hasła powinnny być takie same", "danger");
+      alert("Hasła powinnny być takie same", "danger");
     } else {
       editUserPassword(match.params.id, formData, history);
     }
@@ -79,7 +77,6 @@ const ResetUserPassword = ({
 ResetUserPassword.propTypes = {
   editUserPassword: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
-  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -89,5 +86,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   editUserPassword,
   getUser,
-  setAlert,
 })(ResetUserPassword);
